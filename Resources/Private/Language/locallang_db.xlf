@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:tcaobject/Resources/Private/Language/locallang_db" date="2021-08-06T08:48:35Z" product-name="tcaobject">
+		<header/>
+		<body>
+			<trans-unit id="tx_tcaobject_domain_model_example" resname="tx_tcaobject_domain_model_example">
+				<source>Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.string_example" resname="tx_tcaobject_domain_model_example.string_example">
+				<source>String Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.text_example" resname="tx_tcaobject_domain_model_example.text_example">
+				<source>Text Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.rich_text_example" resname="tx_tcaobject_domain_model_example.rich_text_example">
+				<source>Rich Text Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.password_example" resname="tx_tcaobject_domain_model_example.password_example">
+				<source>Password Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.email_example" resname="tx_tcaobject_domain_model_example.email_example">
+				<source>Email Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.integer_example" resname="tx_tcaobject_domain_model_example.integer_example">
+				<source>Integer Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.float_example" resname="tx_tcaobject_domain_model_example.float_example">
+				<source>Float Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.boolean_example" resname="tx_tcaobject_domain_model_example.boolean_example">
+				<source>Boolean Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.date_example" resname="tx_tcaobject_domain_model_example.date_example">
+				<source>Date Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.date_time_example" resname="tx_tcaobject_domain_model_example.date_time_example">
+				<source>Date Time Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.time_example" resname="tx_tcaobject_domain_model_example.time_example">
+				<source>Time Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.time_sec_example" resname="tx_tcaobject_domain_model_example.time_sec_example">
+				<source>Time Sec Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.select_example" resname="tx_tcaobject_domain_model_example.select_example">
+				<source>Select Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.file_example" resname="tx_tcaobject_domain_model_example.file_example">
+				<source>File Example</source>
+			</trans-unit>
+			<trans-unit id="tx_tcaobject_domain_model_example.image_example" resname="tx_tcaobject_domain_model_example.image_example">
+				<source>Image Example</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

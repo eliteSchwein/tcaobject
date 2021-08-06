@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:tcaobject/Resources/Private/Language/locallang_csh" date="2021-08-06T08:48:35Z" product-name="tcaobject">
+		<header/>
+		<body>
+			<trans-unit id="string_example.description" resname="string_example.description">
+				<source>stringExample</source>
+			</trans-unit>
+			<trans-unit id="text_example.description" resname="text_example.description">
+				<source>textExample</source>
+			</trans-unit>
+			<trans-unit id="rich_text_example.description" resname="rich_text_example.description">
+				<source>richTextExample</source>
+			</trans-unit>
+			<trans-unit id="password_example.description" resname="password_example.description">
+				<source>passwordExample</source>
+			</trans-unit>
+			<trans-unit id="email_example.description" resname="email_example.description">
+				<source>emailExample</source>
+			</trans-unit>
+			<trans-unit id="integer_example.description" resname="integer_example.description">
+				<source>integerExample</source>
+			</trans-unit>
+			<trans-unit id="float_example.description" resname="float_example.description">
+				<source>floatExample</source>
+			</trans-unit>
+			<trans-unit id="boolean_example.description" resname="boolean_example.description">
+				<source>booleanExample</source>
+			</trans-unit>
+			<trans-unit id="date_example.description" resname="date_example.description">
+				<source>dateExample</source>
+			</trans-unit>
+			<trans-unit id="date_time_example.description" resname="date_time_example.description">
+				<source>dateTimeExample</source>
+			</trans-unit>
+			<trans-unit id="time_example.description" resname="time_example.description">
+				<source>timeExample</source>
+			</trans-unit>
+			<trans-unit id="time_sec_example.description" resname="time_sec_example.description">
+				<source>timeSecExample</source>
+			</trans-unit>
+			<trans-unit id="select_example.description" resname="select_example.description">
+				<source>selectExample</source>
+			</trans-unit>
+			<trans-unit id="file_example.description" resname="file_example.description">
+				<source>fileExample</source>
+			</trans-unit>
+			<trans-unit id="image_example.description" resname="image_example.description">
+				<source>imageExample</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
