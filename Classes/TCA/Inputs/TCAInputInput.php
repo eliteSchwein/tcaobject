@@ -8,5 +8,5 @@ class TCAInputInput extends TCAInputBase
 {
     protected string $type = 'input';
     protected string $eval = 'trim';
-
+    protected bool $searchable = true;
 }

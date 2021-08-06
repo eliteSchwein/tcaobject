@@ -10,6 +10,7 @@ class TCAInputText extends TCAInputBase
     protected string $eval = 'trim';
     protected string $richTextConfiguration = 'default';
     protected bool $richText = false;
+    protected bool $searchable = true;
     protected int $size = -1;
     protected int $cols = 40;
     protected int $rows = 15;

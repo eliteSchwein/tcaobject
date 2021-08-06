@@ -12,6 +12,7 @@ class TCAInputBase
     protected string $renderType = '';
     protected bool $requiresItems = false;
     protected bool $visible = true;
+    protected bool $searchable = false;
     protected int $size = 30;
     protected int $maxItems = 9999;
     protected array $fieldControls = [];
