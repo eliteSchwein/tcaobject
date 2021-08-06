@@ -2,6 +2,9 @@
 
 namespace ThomasLudwig\Tcaobject\TCA;
 
+use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputCheck;
+use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputDateTimeInteger;
+
 class TCA
 {
     protected string $title = '';
@@ -12,9 +15,34 @@ class TCA
     protected string $crdate = 'crdate';
     protected string $cruser_id = 'cruser_id';
     protected string $languageField = 'sys_language_uid';
+    protected string $transOrigPointerField = 'l10n_parent';
+    protected string $transOrigDiffSourceField = 'l10n_diffsource';
     protected bool $versioning = true;
     protected array $inputs = [];
+    protected array $enableColumns = [];
 
+    public function __construct()
+    {
+        $hidden = new TCAInputCheck();
+        $hidden->setDatasetName('hidden');
+        $hidden->setLabel('LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible');
+        $hidden->addItem(0, '');
+        $hidden->addItem(1, '');
+        $hidden->addItem('invertStateDisplay', true);
+
+        $starttime = new TCAInputDateTimeInteger();
+        $starttime->setLabel('LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime');
+        $starttime->addBehavior('allowLanguageSynchronization', true);
+
+        $endtime = new TCAInputDateTimeInteger();
+        $endtime->setLabel('LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime');
+        $endtime->addBehavior('upper', mktime(0, 0, 0, 1, 1, 2038));
+        $endtime->addBehavior('allowLanguageSynchronization', true);
+
+        $this->addInput($hidden);
+        $this->addInput($starttime);
+        $this->addInput($endtime);
+    }
 
     /**
      * @param string $title
@@ -83,6 +111,15 @@ class TCA
     public function getInputs(): array
     {
         return $this->inputs;
+    }
+
+    public function removeInput(string $datasetName)
+    {
+        foreach ($this->inputs as $key => $value) {
+            if($value->getDatasetName() === $datasetName) {
+                unset($this->inputs[$key]);
+            }
+        }
     }
 
     /**
@@ -179,5 +216,65 @@ class TCA
     public function setLanguageField(string $languageField): void
     {
         $this->languageField = $languageField;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransOrigPointerField(): string
+    {
+        return $this->transOrigPointerField;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransOrigDiffSourceField(): string
+    {
+        return $this->transOrigDiffSourceField;
+    }
+
+    /**
+     * @param string $transOrigPointerField
+     */
+    public function setTransOrigPointerField(string $transOrigPointerField): void
+    {
+        $this->transOrigPointerField = $transOrigPointerField;
+    }
+
+    /**
+     * @param string $transOrigDiffSourceField
+     */
+    public function setTransOrigDiffSourceField(string $transOrigDiffSourceField): void
+    {
+        $this->transOrigDiffSourceField = $transOrigDiffSourceField;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEnableColumns(): array
+    {
+        return $this->enableColumns;
+    }
+
+    /**
+     * @param array $enableColumns
+     */
+    public function setEnableColumns(array $enableColumns): void
+    {
+        $this->enableColumns = $enableColumns;
+    }
+
+    public function removeEnableColumn(string $enableColumn): void
+    {
+        if (($key = array_search($enableColumn, $this->enableColumns)) !== false) {
+            unset($this->enableColumns[$key]);
+        }
+    }
+
+    public function addEnableColumn(string $enableColumn): void
+    {
+        array_push($this->enableColumns, $enableColumn);
     }
 }

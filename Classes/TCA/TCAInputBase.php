@@ -17,6 +17,8 @@ class TCAInputBase
     protected int $maxItems = 9999;
     protected array $fieldControls = [];
     protected array $items = [];
+    protected array $behaviour = [];
+    protected array $range = [];
     protected $default = '';
 
     /**
@@ -174,5 +176,136 @@ class TCAInputBase
     public function setMaxItems(int $maxItems): void
     {
         $this->maxItems = $maxItems;
+    }
+
+    /**
+     * @param array $items
+     */
+    public function setItems(array $items): void
+    {
+        $this->items = $items;
+    }
+
+    /**
+     * @return array
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
+    public function addItem($key, $value): void
+    {
+        $this->items[$key] = $value;
+    }
+
+    public function removeItemByKey($key): void
+    {
+        unset($this->items[$key]);
+    }
+
+    public function removeItemByValue($value): void
+    {
+        if (($key = array_search($value, $this->items)) !== false) {
+            unset($this->items[$key]);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getBehaviour(): array
+    {
+        return $this->behaviour;
+    }
+
+    /**
+     * @param array $behaviour
+     */
+    public function setBehaviour(array $behaviour): void
+    {
+        $this->behaviour = $behaviour;
+    }
+
+    public function addBehavior($key, $value): void
+    {
+        $this->behaviour[$key] = $value;
+    }
+
+    public function removeBehaviorByKey($key): void
+    {
+        unset($this->behaviour[$key]);
+    }
+
+    public function removeBehaviorByValue($value): void
+    {
+        if (($key = array_search($value, $this->behaviour)) !== false) {
+            unset($this->behaviour[$key]);
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVisible(): bool
+    {
+        return $this->visible;
+    }
+
+    /**
+     * @param bool $visible
+     */
+    public function setVisible(bool $visible): void
+    {
+        $this->visible = $visible;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSearchable(): bool
+    {
+        return $this->searchable;
+    }
+
+    /**
+     * @param bool $searchable
+     */
+    public function setSearchable(bool $searchable): void
+    {
+        $this->searchable = $searchable;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRange(): array
+    {
+        return $this->range;
+    }
+
+    /**
+     * @param array $range
+     */
+    public function setRange(array $range): void
+    {
+        $this->range = $range;
+    }
+
+    public function addRange($key, $value): void
+    {
+        $this->range[$key] = $value;
+    }
+
+    public function removeRangeByKey($key): void
+    {
+        unset($this->range[$key]);
+    }
+
+    public function removeRangeByValue($value): void
+    {
+        if (($key = array_search($value, $this->range)) !== false) {
+            unset($this->range[$key]);
+        }
     }
 }
