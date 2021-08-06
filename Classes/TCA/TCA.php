@@ -5,8 +5,6 @@ namespace ThomasLudwig\Tcaobject\TCA;
 use ThomasLudwig\Tcaobject\TCA\Controls\Administration;
 use ThomasLudwig\Tcaobject\TCA\Controls\Locale;
 use ThomasLudwig\Tcaobject\TCA\Controls\Misc;
-use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputCheck;
-use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputDateTimeInteger;
 
 class TCA
 {
@@ -23,31 +21,19 @@ class TCA
     protected Administration $administration;
     protected Locale $locale;
 
+    protected array $rawArray = [
+        'ctrl' => [],
+        'types' => [
+            '1' => ['showitem' => '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access']
+        ],
+        'columns' => []
+    ];
+
     public function __construct()
     {
         $this->misc = new Misc();
         $this->administration = new Administration();
         $this->locale = new Locale();
-
-        $hidden = new TCAInputCheck();
-        $hidden->setDatasetName('hidden');
-        $hidden->setLabel('LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible');
-        $hidden->addItem(0, '');
-        $hidden->addItem(1, '');
-        $hidden->addItem('invertStateDisplay', true);
-
-        $starttime = new TCAInputDateTimeInteger();
-        $starttime->setLabel('LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime');
-        $starttime->addBehavior('allowLanguageSynchronization', true);
-
-        $endtime = new TCAInputDateTimeInteger();
-        $endtime->setLabel('LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime');
-        $endtime->addBehavior('upper', mktime(0, 0, 0, 1, 1, 2038));
-        $endtime->addBehavior('allowLanguageSynchronization', true);
-
-        $this->addInput($hidden);
-        $this->addInput($starttime);
-        $this->addInput($endtime);
     }
 
     /**
@@ -234,5 +220,47 @@ class TCA
     public function setLocale(Locale $locale): void
     {
         $this->locale = $locale;
+    }
+
+    public function asArray(): array
+    {
+        $this->parseSection('ctrl', $this->administration->asArray());
+        $this->parseSection('ctrl', $this->locale->asArray());
+        $this->parseSection('ctrl', $this->misc->asArray());
+
+        $visibleList = $this->rawArray['types']['1']['showitem'];
+        $visibleList = $visibleList.', '.$this->locale->getLanguageField();
+        $visibleList = $visibleList.', '.$this->locale->getTransOrigDiffSourceField();
+        $visibleList = $visibleList.', '.$this->locale->getTransOrigPointerField();
+        $this->rawArray['types']['1']['showitem'] = $visibleList;
+
+        $this->rawArray['ctrl']['title'] = $this->getTitle();
+        $this->rawArray['ctrl']['label'] = $this->getLabel();
+        $this->rawArray['ctrl']['iconfile'] = $this->getIconFile();
+        $this->rawArray['ctrl']['delete'] = $this->getDelete();
+        $this->rawArray['ctrl']['enablecolumns'] = $this->getEnableColumns();
+        $this->rawArray['ctrl']['descriptionColumn'] = $this->getDescriptionColumn();
+
+        $this->parseInputs();
+
+        return $this->rawArray;
+    }
+    protected function parseInputs() {
+        foreach ($this->getInputs() as $key => $input) {
+            $dataname = $input->getDatasetName();
+            $this->rawArray['columns'][$dataname] = $input->asArray();
+            if($input->isVisible()) {
+                $visibleList = $this->rawArray['types']['1']['showitem'];
+                $visibleList = $visibleList.', '.$dataname;
+                $this->rawArray['types']['1']['showitem'] = $visibleList;
+            }
+        }
+    }
+
+    protected function parseSection($inArray, $section) {
+        foreach ((array) $section as $key => $value){
+            $cleanedUpKey = str_replace('*', '', $key);
+            $this->rawArray[$inArray][$cleanedUpKey] = $value;
+        }
     }
 }

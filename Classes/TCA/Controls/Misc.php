@@ -8,7 +8,9 @@ class Misc
     protected string $crdate = 'crdate';
     protected string $cruser_id = 'cruser_id';
 
-    protected bool $versioning = true;
+    protected bool $versioningWS = true;
+
+    protected int $rootLevel = 0;
 
     /**
      * @return string
@@ -63,7 +65,7 @@ class Misc
      */
     public function isVersioning(): bool
     {
-        return $this->versioning;
+        return $this->versioningWS;
     }
 
     /**
@@ -71,6 +73,33 @@ class Misc
      */
     public function setVersioning(bool $versioning): void
     {
-        $this->versioning = $versioning;
+        $this->versioningWS = $versioning;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRootLevel(): int
+    {
+        return $this->rootLevel;
+    }
+
+    /**
+     * @param int $rootLevel
+     */
+    public function setRootLevel(int $rootLevel): void
+    {
+        $this->rootLevel = $rootLevel;
+    }
+
+    public function asArray(): array
+    {
+        $rawArray = [];
+        foreach ((array) $this as $key => $value) {
+            $cleanedUpKey = str_replace('*', '', $key);
+            $cleanedUpKey = trim($cleanedUpKey);
+            $rawArray[$cleanedUpKey] = $value;
+        }
+        return $rawArray;
     }
 }

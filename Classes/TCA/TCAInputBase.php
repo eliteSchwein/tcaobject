@@ -308,4 +308,16 @@ class TCAInputBase
             unset($this->range[$key]);
         }
     }
+
+    public function asArray(): array
+    {
+        $rawArray = [];
+        foreach ((array) $this as $key => $value) {
+            $cleanedUpKey = str_replace('*', '', $key);
+            $cleanedUpKey = trim($cleanedUpKey);
+            $rawArray[$cleanedUpKey] = $value;
+        }
+        unset($rawArray['datasetName']);
+        return $rawArray;
+    }
 }

@@ -55,4 +55,15 @@ class Locale
     {
         $this->transOrigDiffSourceField = $transOrigDiffSourceField;
     }
+
+    public function asArray(): array
+    {
+        $rawArray = [];
+        foreach ((array) $this as $key => $value) {
+            $cleanedUpKey = str_replace('*', '', $key);
+            $cleanedUpKey = trim($cleanedUpKey);
+            $rawArray[$cleanedUpKey] = $value;
+        }
+        return $rawArray;
+    }
 }

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace ThomasLudwig\Tcaobject\Controller;
 
 
+use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
-use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputText;
-use ThomasLudwig\Tcaobject\TCA\TCA;
+use ThomasLudwig\Tcaobject\TCA\Utils\ArrayGenerator;
 
 /**
  * This file is part of the "TCAObject" Extension for TYPO3 CMS.
@@ -47,17 +47,18 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction()
     {
-        $tca = new TCA();
+        $tca = new DefaultTCA();
         $tca->setLabel('test');
         $tca->setTitle('test');
 
         $input = new TCAInputInput();
         $input->setLabel('testinput');
+        $input->setDatasetName('testinput');
         $tca->addInput($input);
 
         $examples = $this->exampleRepository->findAll();
         $this->view->assign('examples', $examples);
-        debug($tca);
+        debug($tca->asArray());
     }
 
     /**

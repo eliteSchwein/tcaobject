@@ -9,7 +9,7 @@ class Administration
     protected bool $readOnly = false;
     protected bool $adminOnly = false;
 
-    protected string $editLock = '';
+    protected string $editlock = '';
 
     /**
      * @return bool
@@ -33,7 +33,7 @@ class Administration
      */
     public function getEditLock(): string
     {
-        return $this->editLock;
+        return $this->editlock;
     }
 
     /**
@@ -41,7 +41,7 @@ class Administration
      */
     public function setEditLock(string $editLock): void
     {
-        $this->editLock = $editLock;
+        $this->editlock = $editLock;
     }
 
     /**
@@ -74,5 +74,16 @@ class Administration
     public function setHideTable(bool $hideTable): void
     {
         $this->hideTable = $hideTable;
+    }
+
+    public function asArray(): array
+    {
+        $rawArray = [];
+        foreach ((array) $this as $key => $value) {
+            $cleanedUpKey = str_replace('*', '', $key);
+            $cleanedUpKey = trim($cleanedUpKey);
+            $rawArray[$cleanedUpKey] = $value;
+        }
+        return $rawArray;
     }
 }
