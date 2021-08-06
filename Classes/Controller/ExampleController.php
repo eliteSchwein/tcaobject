@@ -48,16 +48,16 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     public function listAction()
     {
         $tca = new DefaultTCA();
-        $tca->setLabel('test');
-        $tca->setTitle('test');
+        $tca->setTitle('LLL:EXT:tcaobject/Resources/Private/Language/locallang_db.xlf:tx_tcaobject_domain_model_example');
+        $tca->setLabel('string_example');
 
-        $input = new TCAInputInput();
-        $input->setLabel('testinput');
-        $input->setDatasetName('testinput');
-        $tca->addInput($input);
+        $stringInput = new \ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput();
+        $stringInput->setDatasetName('string_example');
+        $stringInput->setLabel('LLL:EXT:tcaobject/Resources/Private/Language/locallang_db.xlf:tx_tcaobject_domain_model_example.string_example');
 
-        $examples = $this->exampleRepository->findAll();
-        $this->view->assign('examples', $examples);
+        $tca->addInput($stringInput);
+
+        var_dump($tca->asArray());
         debug($tca->asArray());
     }
 
