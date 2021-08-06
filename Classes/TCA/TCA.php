@@ -2,6 +2,9 @@
 
 namespace ThomasLudwig\Tcaobject\TCA;
 
+use ThomasLudwig\Tcaobject\TCA\Controls\Administration;
+use ThomasLudwig\Tcaobject\TCA\Controls\Locale;
+use ThomasLudwig\Tcaobject\TCA\Controls\Misc;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputCheck;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputDateTimeInteger;
 
@@ -10,19 +13,22 @@ class TCA
     protected string $title = '';
     protected string $label = '';
     protected string $iconFile = '';
+    protected string $descriptionColumn = '';
     protected string $delete = 'deleted';
-    protected string $tstamp = 'tstamp';
-    protected string $crdate = 'crdate';
-    protected string $cruser_id = 'cruser_id';
-    protected string $languageField = 'sys_language_uid';
-    protected string $transOrigPointerField = 'l10n_parent';
-    protected string $transOrigDiffSourceField = 'l10n_diffsource';
-    protected bool $versioning = true;
+
     protected array $inputs = [];
     protected array $enableColumns = [];
 
+    protected Misc $misc;
+    protected Administration $administration;
+    protected Locale $locale;
+
     public function __construct()
     {
+        $this->misc = new Misc();
+        $this->administration = new Administration();
+        $this->locale = new Locale();
+
         $hidden = new TCAInputCheck();
         $hidden->setDatasetName('hidden');
         $hidden->setLabel('LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible');
@@ -139,118 +145,6 @@ class TCA
     }
 
     /**
-     * @return string
-     */
-    public function getTimeStamp(): string
-    {
-        return $this->tstamp;
-    }
-
-    /**
-     * @param string $tstamp
-     */
-    public function setTimeStamp(string $tstamp): void
-    {
-        $this->tstamp = $tstamp;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCreateDate(): string
-    {
-        return $this->crdate;
-    }
-
-    /**
-     * @param string $crdate
-     */
-    public function setCreateDate(string $crdate): void
-    {
-        $this->crdate = $crdate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCreateUserId(): string
-    {
-        return $this->cruser_id;
-    }
-
-    /**
-     * @param string $cruser_id
-     */
-    public function setCreateUserId(string $cruser_id): void
-    {
-        $this->cruser_id = $cruser_id;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isVersioning(): bool
-    {
-        return $this->versioning;
-    }
-
-    /**
-     * @param bool $versioning
-     */
-    public function setVersioning(bool $versioning): void
-    {
-        $this->versioning = $versioning;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLanguageField(): string
-    {
-        return $this->languageField;
-    }
-
-    /**
-     * @param string $languageField
-     */
-    public function setLanguageField(string $languageField): void
-    {
-        $this->languageField = $languageField;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTransOrigPointerField(): string
-    {
-        return $this->transOrigPointerField;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTransOrigDiffSourceField(): string
-    {
-        return $this->transOrigDiffSourceField;
-    }
-
-    /**
-     * @param string $transOrigPointerField
-     */
-    public function setTransOrigPointerField(string $transOrigPointerField): void
-    {
-        $this->transOrigPointerField = $transOrigPointerField;
-    }
-
-    /**
-     * @param string $transOrigDiffSourceField
-     */
-    public function setTransOrigDiffSourceField(string $transOrigDiffSourceField): void
-    {
-        $this->transOrigDiffSourceField = $transOrigDiffSourceField;
-    }
-
-    /**
      * @return array
      */
     public function getEnableColumns(): array
@@ -276,5 +170,69 @@ class TCA
     public function addEnableColumn(string $enableColumn): void
     {
         array_push($this->enableColumns, $enableColumn);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescriptionColumn(): string
+    {
+        return $this->descriptionColumn;
+    }
+
+    /**
+     * @param string $descriptionColumn
+     */
+    public function setDescriptionColumn(string $descriptionColumn): void
+    {
+        $this->descriptionColumn = $descriptionColumn;
+    }
+
+    /**
+     * @return Misc
+     */
+    public function getMisc(): Misc
+    {
+        return $this->misc;
+    }
+
+    /**
+     * @param Misc $misc
+     */
+    public function setMisc(Misc $misc): void
+    {
+        $this->misc = $misc;
+    }
+
+    /**
+     * @return Administration
+     */
+    public function getAdministration(): Administration
+    {
+        return $this->administration;
+    }
+
+    /**
+     * @param Administration $administration
+     */
+    public function setAdministration(Administration $administration): void
+    {
+        $this->administration = $administration;
+    }
+
+    /**
+     * @return Locale
+     */
+    public function getLocale(): Locale
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param Locale $locale
+     */
+    public function setLocale(Locale $locale): void
+    {
+        $this->locale = $locale;
     }
 }

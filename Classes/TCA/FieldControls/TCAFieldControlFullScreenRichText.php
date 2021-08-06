@@ -1,6 +1,6 @@
 <?php
 
-namespace ThomasLudwig\Tcaobject\TCA\FieldControl;
+namespace ThomasLudwig\Tcaobject\TCA\FieldControls;
 
 use ThomasLudwig\Tcaobject\TCA\TCAFieldControlBase;
 
