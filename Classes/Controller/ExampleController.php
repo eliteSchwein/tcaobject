@@ -5,13 +5,17 @@ declare(strict_types=1);
 namespace ThomasLudwig\Tcaobject\Controller;
 
 
+use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
+use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputText;
+use ThomasLudwig\Tcaobject\TCA\TCA;
+
 /**
  * This file is part of the "TCAObject" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
- * (c) 2021 
+ * (c) 2021
  */
 
 
@@ -43,8 +47,17 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction()
     {
+        $tca = new TCA();
+        $tca->setLabel('test');
+        $tca->setTitle('test');
+
+        $input = new TCAInputInput();
+        $input->setLabel('testinput');
+        $tca->addInput($input);
+
         $examples = $this->exampleRepository->findAll();
         $this->view->assign('examples', $examples);
+        debug($tca);
     }
 
     /**
