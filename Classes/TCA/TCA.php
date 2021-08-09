@@ -43,6 +43,7 @@ class TCA
         $this->misc = new Misc();
         $this->administration = new Administration();
         $this->locale = new Locale();
+        $this->interfaces = new Interfaces();
     }
 
     /**
