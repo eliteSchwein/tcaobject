@@ -5,7 +5,7 @@ namespace ThomasLudwig\Tcaobject\TCA;
 abstract class TCARenderTypes
 {
     const default = 'default';
-    const colorpicker = 'colorpicker';
+    const colorPicker = 'colorpicker';
     const checkboxToggle = 'checkboxToggle';
     const singleSelect = 'selectSingle';
     const singleSelectBox = 'singleSelectBox';
