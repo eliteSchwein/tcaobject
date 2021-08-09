@@ -15,7 +15,7 @@ class TCA
     protected string $delete = 'deleted';
     protected string $databaseTable = '';
 
-    protected array $inputs = [];
+    protected array $components = [];
     protected array $enableColumns = [];
 
     protected Misc $misc;
@@ -29,7 +29,8 @@ class TCA
         'types' => [
             '1' => ['showitem' => '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access']
         ],
-        'columns' => []
+        'columns' => [],
+        'palettes' => []
     ];
 
     public function __construct()
@@ -88,31 +89,58 @@ class TCA
     }
 
     /**
-     * @param array $inputs
+     * @return array
      */
-    public function setInputs(array $inputs): void
+    public function getComponents(): array
     {
-        $this->inputs = $inputs;
-    }
-
-
-    public function addInput(TCAInputBase $input) {
-        array_push($this->inputs, $input);
+        return $this->components;
     }
 
     /**
-     * @return array
+     * @param array $components
      */
-    public function getInputs(): array
+    public function setComponents(array $components): void
     {
-        return $this->inputs;
+        $this->components = $components;
     }
 
-    public function removeInput(string $datasetName)
+    public function addPalette(TCAPaletteBase $palette): void
     {
-        foreach ($this->inputs as $key => $value) {
-            if($value->getDatasetName() === $datasetName) {
-                unset($this->inputs[$key]);
+        $this->components[] = $palette;
+    }
+
+    public function addInput(TCAInputBase $input) {
+        $this->components[] = $input;
+    }
+
+    public function addSpacer(TCASpacer $spacer) {
+        $this->components[] = $spacer;
+    }
+
+    public function removeInput(string $name)
+    {
+        foreach ($this->components as $key => $value) {
+            if($value instanceof TCAInputBase &&
+                $value->getName() === $name) {
+                unset($this->components[$key]);
+            }
+        }
+    }
+
+    public function removePalette(string $name) {
+        foreach ($this->components as $key => $value) {
+            if($value instanceof TCAPaletteBase &&
+                $value->getName() === $name) {
+                unset($this->components[$key]);
+            }
+        }
+    }
+
+    public function removeSpacer(string $name) {
+        foreach($this->components as $key => $value) {
+            if($value instanceof TCASpacer &&
+                $value->getName() === $name) {
+                unset($this->components[$key]);
             }
         }
     }
@@ -260,25 +288,38 @@ class TCA
         $this->rawArray['ctrl']['enablecolumns'] = $this->getEnableColumns();
         $this->rawArray['ctrl']['descriptionColumn'] = $this->getDescriptionColumn();
 
-        $this->parseInputs();
+        $this->parseComponents();
 
         return $this->rawArray;
     }
-    protected function parseInputs() {
-        foreach ($this->getInputs() as $key => $input) {
-            $dataname = $input->getDatasetName();
-            $this->rawArray['columns'][$dataname] = $input->asArray();
-            if($input->isSearchable()) {
-                $searchableList = $this->rawArray['ctrl']['searchFields'];
-                $searchableList = $searchableList.', '.$dataname;
-                $this->rawArray['ctrl']['searchFields'] = $searchableList;
+    protected function parseComponents() {
+        foreach ($this->getComponents() as $key => $component) {
+            $dataname = $component->getName();
+            if($component instanceof TCAInputBase) {
+                $this->rawArray['columns'][$dataname] = $component->asArray();
+                if($component->isSearchable()) {
+                    $searchableList = $this->rawArray['ctrl']['searchFields'];
+                    $searchableList = $searchableList.', '.$dataname;
+                    $this->rawArray['ctrl']['searchFields'] = $searchableList;
+                }
+                if($component->isVisible()) {
+                    $this->addShowItem($dataname);
+                }
             }
-            if($input->isVisible()) {
-                $visibleList = $this->rawArray['types']['1']['showitem'];
-                $visibleList = $visibleList.', '.$dataname;
-                $this->rawArray['types']['1']['showitem'] = $visibleList;
+            if($component instanceof TCAPaletteBase) {
+                $this->rawArray['palettes'][$dataname] = $component->asArray();
+                $this->addShowItem('--palette--;;'.$dataname);
+            }
+            if($component instanceof TCASpacer) {
+                $this->addShowItem('--linebreak--');
             }
         }
+    }
+
+    protected function addShowItem($item) {
+        $visibleList = $this->rawArray['types']['1']['showitem'];
+        $visibleList = $visibleList.', '.$item;
+        $this->rawArray['types']['1']['showitem'] = $visibleList;
     }
 
     protected function parseSection($inArray, $section) {

@@ -4,7 +4,7 @@ namespace ThomasLudwig\Tcaobject\TCA;
 
 class TCAInputBase
 {
-    protected ?string $datasetName = null;
+    protected ?string $name = null;
     protected ?string $label = null;
     protected ?string $type = null;
     protected ?string $databaseType = null;
@@ -104,17 +104,17 @@ class TCAInputBase
     /**
      * @return string
      */
-    public function getDatasetName(): ?string
+    public function getName(): ?string
     {
-        return $this->datasetName;
+        return $this->name;
     }
 
     /**
-     * @param string $datasetName
+     * @param string $name
      */
-    public function setDatasetName(string $datasetName): void
+    public function setName(string $name): void
     {
-        $this->datasetName = $datasetName;
+        $this->name = $name;
     }
 
     /**
@@ -257,25 +257,25 @@ class TCAInputBase
     }
 
     /**
-     * @return bool
+     * @return null|bool
      */
-    public function isVisible(): bool
+    public function isVisible(): ?bool
     {
         return $this->visible;
     }
 
     /**
-     * @param bool $visible
+     * @param null|bool $visible
      */
-    public function setVisible(bool $visible): void
+    public function setVisible(?bool $visible): void
     {
         $this->visible = $visible;
     }
 
     /**
-     * @return bool
+     * @return null|bool
      */
-    public function isSearchable(): bool
+    public function isSearchable(): ?bool
     {
         return $this->searchable;
     }
@@ -435,7 +435,7 @@ class TCAInputBase
                 $rawArray['config'][$cleanedUpKey] = $value;
             }
         }
-        unset($rawArray['config']['datasetName']);
+        unset($rawArray['config']['name']);
         unset($rawArray['config']['displayCond']);
         unset($rawArray['config']['label']);
         unset($rawArray['config']['searchable']);

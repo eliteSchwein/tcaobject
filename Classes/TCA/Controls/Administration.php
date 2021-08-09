@@ -4,74 +4,74 @@ namespace ThomasLudwig\Tcaobject\TCA\Controls;
 
 class Administration
 {
-    protected bool $hideAtCopy = false;
-    protected bool $hideTable = false;
-    protected bool $readOnly = false;
-    protected bool $adminOnly = false;
+    protected ?bool $hideAtCopy = null;
+    protected ?bool $hideTable = null;
+    protected ?bool $readOnly = null;
+    protected ?bool $adminOnly = null;
 
-    protected string $editlock = '';
+    protected ?string $editlock = null;
 
     /**
-     * @return bool
+     * @return ?bool
      */
-    public function isAdminOnly(): bool
+    public function isAdminOnly(): ?bool
     {
         return $this->adminOnly;
     }
 
     /**
-     * @param bool $adminOnly
+     * @param ?bool $adminOnly
      */
-    public function setAdminOnly(bool $adminOnly): void
+    public function setAdminOnly(?bool $adminOnly): void
     {
         $this->adminOnly = $adminOnly;
     }
 
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getEditLock(): string
+    public function getEditLock(): ?string
     {
         return $this->editlock;
     }
 
     /**
-     * @param string $editLock
+     * @param ?string $editLock
      */
-    public function setEditLock(string $editLock): void
+    public function setEditLock(?string $editLock): void
     {
         $this->editlock = $editLock;
     }
 
     /**
-     * @return bool
+     * @return ?bool
      */
-    public function isHideAtCopy(): bool
+    public function isHideAtCopy(): ?bool
     {
         return $this->hideAtCopy;
     }
 
     /**
-     * @param bool $hideAtCopy
+     * @param ?bool $hideAtCopy
      */
-    public function setHideAtCopy(bool $hideAtCopy): void
+    public function setHideAtCopy(?bool $hideAtCopy): void
     {
         $this->hideAtCopy = $hideAtCopy;
     }
 
     /**
-     * @return bool
+     * @return ?bool
      */
-    public function isHideTable(): bool
+    public function isHideTable(): ?bool
     {
         return $this->hideTable;
     }
 
     /**
-     * @param bool $hideTable
+     * @param ?bool $hideTable
      */
-    public function setHideTable(bool $hideTable): void
+    public function setHideTable(?bool $hideTable): void
     {
         $this->hideTable = $hideTable;
     }
@@ -82,7 +82,11 @@ class Administration
         foreach ((array) $this as $key => $value) {
             $cleanedUpKey = str_replace('*', '', $key);
             $cleanedUpKey = trim($cleanedUpKey);
-            $rawArray[$cleanedUpKey] = $value;
+
+            if((is_array($value) && sizeof($value) > 0) ||
+                (!is_array($value) && !is_null($value))) {
+                $rawArray[$cleanedUpKey] = $value;
+            }
         }
         return $rawArray;
     }

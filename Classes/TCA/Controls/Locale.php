@@ -4,54 +4,54 @@ namespace ThomasLudwig\Tcaobject\TCA\Controls;
 
 class Locale
 {
-    protected string $languageField = 'sys_language_uid';
-    protected string $transOrigPointerField = 'l10n_parent';
-    protected string $transOrigDiffSourceField = 'l10n_diffsource';
+    protected ?string $languageField = 'sys_language_uid';
+    protected ?string $transOrigPointerField = 'l10n_parent';
+    protected ?string $transOrigDiffSourceField = 'l10n_diffsource';
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getLanguageField(): string
+    public function getLanguageField(): ?string
     {
         return $this->languageField;
     }
 
     /**
-     * @param string $languageField
+     * @param ?string $languageField
      */
-    public function setLanguageField(string $languageField): void
+    public function setLanguageField(?string $languageField): void
     {
         $this->languageField = $languageField;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getTransOrigPointerField(): string
+    public function getTransOrigPointerField(): ?string
     {
         return $this->transOrigPointerField;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getTransOrigDiffSourceField(): string
+    public function getTransOrigDiffSourceField(): ?string
     {
         return $this->transOrigDiffSourceField;
     }
 
     /**
-     * @param string $transOrigPointerField
+     * @param ?string $transOrigPointerField
      */
-    public function setTransOrigPointerField(string $transOrigPointerField): void
+    public function setTransOrigPointerField(?string $transOrigPointerField): void
     {
         $this->transOrigPointerField = $transOrigPointerField;
     }
 
     /**
-     * @param string $transOrigDiffSourceField
+     * @param ?string $transOrigDiffSourceField
      */
-    public function setTransOrigDiffSourceField(string $transOrigDiffSourceField): void
+    public function setTransOrigDiffSourceField(?string $transOrigDiffSourceField): void
     {
         $this->transOrigDiffSourceField = $transOrigDiffSourceField;
     }
@@ -62,7 +62,11 @@ class Locale
         foreach ((array) $this as $key => $value) {
             $cleanedUpKey = str_replace('*', '', $key);
             $cleanedUpKey = trim($cleanedUpKey);
-            $rawArray[$cleanedUpKey] = $value;
+
+            if((is_array($value) && sizeof($value) > 0) ||
+                (!is_array($value) && !is_null($value))) {
+                $rawArray[$cleanedUpKey] = $value;
+            }
         }
         return $rawArray;
     }

@@ -4,90 +4,90 @@ namespace ThomasLudwig\Tcaobject\TCA\Controls;
 
 class Misc
 {
-    protected string $tstamp = 'tstamp';
-    protected string $crdate = 'crdate';
-    protected string $cruser_id = 'cruser_id';
+    protected ?string $tstamp = 'tstamp';
+    protected ?string $crdate = 'crdate';
+    protected ?string $cruser_id = 'cruser_id';
 
-    protected bool $versioningWS = true;
+    protected ?bool $versioningWS = true;
 
-    protected int $rootLevel = 0;
+    protected ?int $rootLevel = null;
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getTimeStamp(): string
+    public function getTimeStamp(): ?string
     {
         return $this->tstamp;
     }
 
     /**
-     * @param string $tstamp
+     * @param ?string $tstamp
      */
-    public function setTimeStamp(string $tstamp): void
+    public function setTimeStamp(?string $tstamp): void
     {
         $this->tstamp = $tstamp;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getCreateDate(): string
+    public function getCreateDate(): ?string
     {
         return $this->crdate;
     }
 
     /**
-     * @param string $crdate
+     * @param ?string $crdate
      */
-    public function setCreateDate(string $crdate): void
+    public function setCreateDate(?string $crdate): void
     {
         $this->crdate = $crdate;
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getCreateUserId(): string
+    public function getCreateUserId(): ?string
     {
         return $this->cruser_id;
     }
 
     /**
-     * @param string $cruser_id
+     * @param ?string $cruser_id
      */
-    public function setCreateUserId(string $cruser_id): void
+    public function setCreateUserId(?string $cruser_id): void
     {
         $this->cruser_id = $cruser_id;
     }
 
     /**
-     * @return bool
+     * @return ?bool
      */
-    public function isVersioning(): bool
+    public function isVersioning(): ?bool
     {
         return $this->versioningWS;
     }
 
     /**
-     * @param bool $versioning
+     * @param ?bool $versioning
      */
-    public function setVersioning(bool $versioning): void
+    public function setVersioning(?bool $versioning): void
     {
         $this->versioningWS = $versioning;
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getRootLevel(): int
+    public function getRootLevel(): ?int
     {
         return $this->rootLevel;
     }
 
     /**
-     * @param int $rootLevel
+     * @param ?int $rootLevel
      */
-    public function setRootLevel(int $rootLevel): void
+    public function setRootLevel(?int $rootLevel): void
     {
         $this->rootLevel = $rootLevel;
     }
@@ -98,7 +98,11 @@ class Misc
         foreach ((array) $this as $key => $value) {
             $cleanedUpKey = str_replace('*', '', $key);
             $cleanedUpKey = trim($cleanedUpKey);
-            $rawArray[$cleanedUpKey] = $value;
+
+            if((is_array($value) && sizeof($value) > 0) ||
+                (!is_array($value) && !is_null($value))) {
+                $rawArray[$cleanedUpKey] = $value;
+            }
         }
         return $rawArray;
     }
