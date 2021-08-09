@@ -2,6 +2,7 @@
 
 use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
+use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputText;
 use ThomasLudwig\Tcaobject\TCA\TCAPaletteBase;
 use ThomasLudwig\Tcaobject\TCA\TCASpacer;
 
@@ -17,10 +18,14 @@ $stringInput->setLabel('LLL:EXT:tcaobject/Resources/Private/Language/locallang_d
 
 $tca->addInput($stringInput);
 
-$spacer = new TCASpacer();
-$spacer->setName('spacer');
+$textInput = new TCAInputText();
+$textInput->setVisible(false);
+$textInput->setLabel('LLL:EXT:tcaobject/Resources/Private/Language/locallang_db.xlf:tx_tcaobject_domain_model_example.text_example');
+$textInput->setName('text_example');
+$textInput->setRichText(true);
 
-$tca->addSpacer($spacer);
+$tca->addInput($textInput);
+
 
 $inputPalette = new TCAPaletteBase();
 $inputPalette->setName('inputpalette');
@@ -28,5 +33,17 @@ $inputPalette->setLabel('Inputs');
 $inputPalette->addItem($stringInput->getName());
 
 $tca->addPalette($inputPalette);
+
+$spacer = new TCASpacer();
+$spacer->setName('spacer');
+
+$tca->addSpacer($spacer);
+
+$textPalette = new TCAPaletteBase();
+$textPalette->setName('textpalette');
+$textPalette->setLabel('Text Example');
+$textPalette->addItem($textInput->getName());
+
+$tca->addPalette($textPalette);
 
 return $tca->asArray();

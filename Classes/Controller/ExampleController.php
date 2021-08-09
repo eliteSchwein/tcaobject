@@ -7,6 +7,7 @@ namespace ThomasLudwig\Tcaobject\Controller;
 
 use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
+use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputText;
 use ThomasLudwig\Tcaobject\TCA\TCAPaletteBase;
 use ThomasLudwig\Tcaobject\TCA\TCASpacer;
 
@@ -71,6 +72,14 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $testpalette->addItem('string_example');
 
         $tca->addPalette($testpalette);
+
+        $textInput = new TCAInputText();
+        $textInput->setVisible(false);
+        $textInput->setLabel('LLL:EXT:tcaobject/Resources/Private/Language/locallang_db.xlf:tx_tcaobject_domain_model_example.text_example');
+        $textInput->setName('text_example');
+        $textInput->setRichText(true);
+
+        $tca->addInput($textInput);
 
         debug($tca->asArray());
     }

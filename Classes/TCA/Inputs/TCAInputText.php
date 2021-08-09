@@ -8,12 +8,13 @@ class TCAInputText extends TCAInputBase
 {
     protected ?string $type = 'text';
     protected ?string $eval = 'trim';
-    protected ?string $richTextConfiguration = 'default';
-    protected bool $richText = false;
+    protected ?string $richtextConfiguration = 'default';
+    protected bool $enableRichtext = false;
     protected ?bool $searchable = true;
     protected ?int $size = -1;
     protected int $cols = 40;
     protected int $rows = 15;
+    protected $default = '';
 
     /**
      * @return int
@@ -52,7 +53,7 @@ class TCAInputText extends TCAInputBase
      */
     public function getRichTextConfiguration(): string
     {
-        return $this->richTextConfiguration;
+        return $this->richtextConfiguration;
     }
 
     /**
@@ -60,7 +61,7 @@ class TCAInputText extends TCAInputBase
      */
     public function setRichTextConfiguration(string $richTextConfiguration): void
     {
-        $this->richTextConfiguration = $richTextConfiguration;
+        $this->richtextConfiguration = $richTextConfiguration;
     }
 
     /**
@@ -68,7 +69,7 @@ class TCAInputText extends TCAInputBase
      */
     public function isRichText(): bool
     {
-        return $this->richText;
+        return $this->enableRichtext;
     }
 
     /**
@@ -76,6 +77,6 @@ class TCAInputText extends TCAInputBase
      */
     public function setRichText(bool $richText): void
     {
-        $this->richText = $richText;
+        $this->enableRichtext = $richText;
     }
 }

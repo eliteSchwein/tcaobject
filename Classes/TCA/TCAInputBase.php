@@ -21,6 +21,7 @@ class TCAInputBase
 
     protected ?int $size = null;
     protected ?int $maxItems = null;
+    protected ?int $minItems = null;
 
     protected array $fieldControls = [];
     protected array $items = [];
@@ -399,6 +400,22 @@ class TCAInputBase
     public function setSpecial(?string $special): void
     {
         $this->special = $special;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMinItems(): ?int
+    {
+        return $this->minItems;
+    }
+
+    /**
+     * @param int|null $minItems
+     */
+    public function setMinItems(?int $minItems): void
+    {
+        $this->minItems = $minItems;
     }
 
     protected function parseInputFragment(array $array, $fragment) {
