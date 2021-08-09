@@ -7,7 +7,6 @@ namespace ThomasLudwig\Tcaobject\Controller;
 
 use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
-use ThomasLudwig\Tcaobject\TCA\Utils\ArrayGenerator;
 
 /**
  * This file is part of the "TCAObject" Extension for TYPO3 CMS.
@@ -47,17 +46,16 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction()
     {
-        $tca = new DefaultTCA();
+        $tca = new DefaultTCA('tx_tcaobject_domain_model_example');
         $tca->setTitle('LLL:EXT:tcaobject/Resources/Private/Language/locallang_db.xlf:tx_tcaobject_domain_model_example');
-        $tca->setLabel('string_example');
+        $tca->setLabel('example');
 
-        $stringInput = new \ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput();
+        $stringInput = new TCAInputInput();
         $stringInput->setDatasetName('string_example');
         $stringInput->setLabel('LLL:EXT:tcaobject/Resources/Private/Language/locallang_db.xlf:tx_tcaobject_domain_model_example.string_example');
 
         $tca->addInput($stringInput);
 
-        var_dump($tca->asArray());
         debug($tca->asArray());
     }
 

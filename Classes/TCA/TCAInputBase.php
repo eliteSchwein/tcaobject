@@ -10,15 +10,22 @@ class TCAInputBase
     protected string $databaseType = '';
     protected string $eval = '';
     protected string $renderType = '';
+    protected string $foreign_table = '';
+    protected string $foreign_table_where = '';
+    protected string $displayCond = '';
+
     protected bool $requiresItems = false;
     protected bool $visible = true;
     protected bool $searchable = false;
+
     protected int $size = 30;
     protected int $maxItems = 9999;
+
     protected array $fieldControls = [];
     protected array $items = [];
     protected array $behaviour = [];
     protected array $range = [];
+
     protected $default = '';
 
     /**
@@ -48,7 +55,7 @@ class TCAInputBase
     /**
      * @return string
      */
-    public function getDefault(): string
+    public function getDefault()
     {
         return $this->default;
     }
@@ -56,7 +63,7 @@ class TCAInputBase
     /**
      * @param string $default
      */
-    public function setDefault(string $default): void
+    public function setDefault($default): void
     {
         $this->default = $default;
     }
@@ -307,6 +314,54 @@ class TCAInputBase
         if (($key = array_search($value, $this->range)) !== false) {
             unset($this->range[$key]);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getForeignTable(): string
+    {
+        return $this->foreign_table;
+    }
+
+    /**
+     * @return string
+     */
+    public function getForeignTableWhere(): string
+    {
+        return $this->foreign_table_where;
+    }
+
+    /**
+     * @param string $foreign_table
+     */
+    public function setForeignTable(string $foreign_table): void
+    {
+        $this->foreign_table = $foreign_table;
+    }
+
+    /**
+     * @param string $foreign_table_where
+     */
+    public function setForeignTableWhere(string $foreign_table_where): void
+    {
+        $this->foreign_table_where = $foreign_table_where;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayCond(): string
+    {
+        return $this->displayCond;
+    }
+
+    /**
+     * @param string $displayCond
+     */
+    public function setDisplayCond(string $displayCond): void
+    {
+        $this->displayCond = $displayCond;
     }
 
     public function asArray(): array

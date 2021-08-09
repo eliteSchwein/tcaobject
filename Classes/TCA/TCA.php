@@ -13,6 +13,7 @@ class TCA
     protected string $iconFile = '';
     protected string $descriptionColumn = '';
     protected string $delete = 'deleted';
+    protected string $databaseTable = '';
 
     protected array $inputs = [];
     protected array $enableColumns = [];
@@ -22,7 +23,9 @@ class TCA
     protected Locale $locale;
 
     protected array $rawArray = [
-        'ctrl' => [],
+        'ctrl' => [
+            'searchFields' => ''
+        ],
         'types' => [
             '1' => ['showitem' => '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access']
         ],
@@ -222,6 +225,22 @@ class TCA
         $this->locale = $locale;
     }
 
+    /**
+     * @return string
+     */
+    public function getDatabaseTable(): string
+    {
+        return $this->databaseTable;
+    }
+
+    /**
+     * @param string $databaseTable
+     */
+    public function setDatabaseTable(string $databaseTable): void
+    {
+        $this->databaseTable = $databaseTable;
+    }
+
     public function asArray(): array
     {
         $this->parseSection('ctrl', $this->administration->asArray());
@@ -249,6 +268,11 @@ class TCA
         foreach ($this->getInputs() as $key => $input) {
             $dataname = $input->getDatasetName();
             $this->rawArray['columns'][$dataname] = $input->asArray();
+            if($input->isSearchable()) {
+                $searchableList = $this->rawArray['ctrl']['searchFields'];
+                $searchableList = $searchableList.', '.$dataname;
+                $this->rawArray['ctrl']['searchFields'] = $searchableList;
+            }
             if($input->isVisible()) {
                 $visibleList = $this->rawArray['types']['1']['showitem'];
                 $visibleList = $visibleList.', '.$dataname;
