@@ -3,6 +3,7 @@
 namespace ThomasLudwig\Tcaobject\TCA;
 
 use ThomasLudwig\Tcaobject\TCA\Controls\Administration;
+use ThomasLudwig\Tcaobject\TCA\Controls\Interfaces;
 use ThomasLudwig\Tcaobject\TCA\Controls\Locale;
 use ThomasLudwig\Tcaobject\TCA\Controls\Misc;
 
@@ -21,11 +22,15 @@ class TCA
     protected Misc $misc;
     protected Administration $administration;
     protected Locale $locale;
+    protected Interfaces $interfaces;
+
+    protected $label_userFunc = '';
 
     protected array $rawArray = [
         'ctrl' => [
             'searchFields' => ''
         ],
+        'interface' => [],
         'types' => [
             '1' => ['showitem' => '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access']
         ],
@@ -269,11 +274,45 @@ class TCA
         $this->databaseTable = $databaseTable;
     }
 
+    /**
+     * @return string
+     */
+    public function getLabelUserFunc(): string
+    {
+        return $this->label_userFunc;
+    }
+
+    /**
+     * @param string $label_userFunc
+     */
+    public function setLabelUserFunc($label_userFunc): void
+    {
+        $this->label_userFunc = $label_userFunc;
+    }
+
+    /**
+     * @return Interfaces
+     */
+    public function getInterfaces(): Interfaces
+    {
+        return $this->interfaces;
+    }
+
+    /**
+     * @param Interfaces $interfaces
+     */
+    public function setInterfaces(Interfaces $interfaces): void
+    {
+        $this->interfaces = $interfaces;
+    }
+
     public function asArray(): array
     {
         $this->parseSection('ctrl', $this->administration->asArray());
         $this->parseSection('ctrl', $this->locale->asArray());
         $this->parseSection('ctrl', $this->misc->asArray());
+
+        $this->parseSection('interface', $this->interfaces->asArray());
 
         $visibleList = $this->rawArray['types']['1']['showitem'];
         $visibleList = $visibleList.', '.$this->locale->getLanguageField();
@@ -287,6 +326,7 @@ class TCA
         $this->rawArray['ctrl']['delete'] = $this->getDelete();
         $this->rawArray['ctrl']['enablecolumns'] = $this->getEnableColumns();
         $this->rawArray['ctrl']['descriptionColumn'] = $this->getDescriptionColumn();
+        $this->rawArray['ctrl']['label_userFunc'] = $this->getLabelUserFunc();
 
         $this->parseComponents();
 

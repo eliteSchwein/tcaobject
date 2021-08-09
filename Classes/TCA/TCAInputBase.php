@@ -14,10 +14,12 @@ class TCAInputBase
     protected ?string $foreign_table_where = null;
     protected ?string $displayCond = null;
     protected ?string $special = null;
+    protected ?string $itemsProcFunc = null;
 
     protected ?bool $visible = true;
     protected ?bool $searchable = false;
     protected ?bool $exclude = true;
+    protected ?bool $readOnly = null;
 
     protected ?int $size = null;
     protected ?int $maxItems = null;
@@ -27,6 +29,7 @@ class TCAInputBase
     protected array $items = [];
     protected array $behaviour = [];
     protected array $range = [];
+    protected array $itemsProcConfig = [];
 
     protected $default = null;
 
@@ -428,6 +431,63 @@ class TCAInputBase
             $array[] = $fragment;
         }
         return $array;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getItemsProcFunc(): ?string
+    {
+        return $this->itemsProcFunc;
+    }
+
+    /**
+     * @param string|null $itemsProcFunc
+     */
+    public function setItemsProcFunc(?string $itemsProcFunc): void
+    {
+        $this->itemsProcFunc = $itemsProcFunc;
+    }
+
+    /**
+     * @param array $itemsProcConfig
+     */
+    public function setItemsProcConfig(array $itemsProcConfig): void
+    {
+        $this->itemsProcConfig = $itemsProcConfig;
+    }
+
+    /**
+     * @return array
+     */
+    public function getItemsProcConfig(): array
+    {
+        return $this->itemsProcConfig;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function addItemProcConfig($key, $value) {
+        $this->itemsProcConfig[$key] = $value;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getReadOnly(): ?bool
+    {
+        return $this->readOnly;
+    }
+
+    /**
+     * @param bool|null $readOnly
+     */
+    public function setReadOnly(?bool $readOnly): void
+    {
+        $this->readOnly = $readOnly;
     }
 
     public function asArray(): array

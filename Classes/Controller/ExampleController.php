@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ThomasLudwig\Tcaobject\Controller;
 
 
+use ThomasLudwig\Tcaobject\Misc\LabelFuncTest;
 use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputText;
@@ -53,6 +54,7 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $tca->setTitle('LLL:EXT:tcaobject/Resources/Private/Language/locallang_db.xlf:tx_tcaobject_domain_model_example');
         $tca->setLabel('string_example');
         $tca->setIconFile('EXT:tcaobject/Resources/Public/Icons/tx_tcaobject_domain_model_example.gif');
+        $tca->setLabelUserFunc(LabelFuncTest::class . '->title');
 
         $stringInput = new \ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput();
         $stringInput->setVisible(false);
