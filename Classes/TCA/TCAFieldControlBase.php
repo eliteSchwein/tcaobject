@@ -30,4 +30,11 @@ class TCAFieldControlBase
     {
         return $this->type;
     }
+
+    public function asArray(): array
+    {
+        $rawArray = [];
+        $rawArray['disabled'] = $this->disabled;
+        return $rawArray;
+    }
 }

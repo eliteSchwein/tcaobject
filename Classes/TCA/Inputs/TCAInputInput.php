@@ -10,4 +10,5 @@ class TCAInputInput extends TCAInputBase
     protected ?string $eval = 'trim';
     protected ?bool $searchable = true;
     protected ?int $size = 30;
+    protected $default = '';
 }

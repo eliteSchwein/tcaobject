@@ -135,7 +135,7 @@ class TCAInputBase
 
     public function addFieldControl($fieldControl): void
     {
-        array_push($this->fieldControls, $fieldControl);
+        $this->fieldControls[] = $fieldControl;
     }
 
     /**
@@ -436,6 +436,7 @@ class TCAInputBase
             }
         }
         unset($rawArray['config']['name']);
+        unset($rawArray['config']['visible']);
         unset($rawArray['config']['displayCond']);
         unset($rawArray['config']['label']);
         unset($rawArray['config']['searchable']);

@@ -293,13 +293,13 @@ class TCA
         return $this->rawArray;
     }
     protected function parseComponents() {
-        foreach ($this->getComponents() as $key => $component) {
+        foreach ($this->getComponents() as $component) {
             $dataname = $component->getName();
             if($component instanceof TCAInputBase) {
                 $this->rawArray['columns'][$dataname] = $component->asArray();
                 if($component->isSearchable()) {
                     $searchableList = $this->rawArray['ctrl']['searchFields'];
-                    $searchableList = $searchableList.', '.$dataname;
+                    $searchableList = $searchableList.','.$dataname;
                     $this->rawArray['ctrl']['searchFields'] = $searchableList;
                 }
                 if($component->isVisible()) {
@@ -308,7 +308,7 @@ class TCA
             }
             if($component instanceof TCAPaletteBase) {
                 $this->rawArray['palettes'][$dataname] = $component->asArray();
-                $this->addShowItem('--palette--;;'.$dataname);
+                $this->addShowItem("--palette--;{$component->getLabel()};{$dataname}");
             }
             if($component instanceof TCASpacer) {
                 $this->addShowItem('--linebreak--');
@@ -316,9 +316,12 @@ class TCA
         }
     }
 
+    /**
+     * @param mixed $item
+     */
     protected function addShowItem($item) {
         $visibleList = $this->rawArray['types']['1']['showitem'];
-        $visibleList = $visibleList.', '.$item;
+        $visibleList = $visibleList.','.$item;
         $this->rawArray['types']['1']['showitem'] = $visibleList;
     }
 

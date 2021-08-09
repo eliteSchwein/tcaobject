@@ -7,6 +7,7 @@ namespace ThomasLudwig\Tcaobject\Controller;
 
 use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
+use ThomasLudwig\Tcaobject\TCA\TCAPaletteBase;
 use ThomasLudwig\Tcaobject\TCA\TCASpacer;
 
 /**
@@ -53,6 +54,7 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $tca->setIconFile('EXT:tcaobject/Resources/Public/Icons/tx_tcaobject_domain_model_example.gif');
 
         $stringInput = new \ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput();
+        $stringInput->setVisible(false);
         $stringInput->setName('string_example');
         $stringInput->setLabel('LLL:EXT:tcaobject/Resources/Private/Language/locallang_db.xlf:tx_tcaobject_domain_model_example.string_example');
 
@@ -62,6 +64,13 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $testspacer->setName('test');
 
         $tca->addSpacer($testspacer);
+
+        $testpalette = new TCAPaletteBase();
+        $testpalette->setName('testpalette');
+        $testpalette->setLabel('test');
+        $testpalette->addItem('string_example');
+
+        $tca->addPalette($testpalette);
 
         debug($tca->asArray());
     }
