@@ -19,12 +19,4 @@ class TCAInputCustom extends \ThomasLudwig\Tcaobject\TCA\TCAInputBase
     {
         $this->type = $type;
     }
-
-    /**
-     * @param bool $requiresItems
-     */
-    public function setRequiresItems(bool $requiresItems): void
-    {
-        $this->requiresItems = $requiresItems;
-    }
 }

@@ -6,9 +6,8 @@ use ThomasLudwig\Tcaobject\TCA\TCAInputBase;
 
 class TCAInputSelect extends TCAInputBase
 {
-    protected string $type = 'select';
-    protected string $eval = '';
-    protected string $renderType = 'selectSingle';
-    protected int $size = 1;
-    protected int $maxItems = 1;
+    protected ?string $type = 'select';
+    protected ?string $renderType = 'selectSingle';
+    protected ?int $size = 1;
+    protected ?int $maxItems = 1;
 }

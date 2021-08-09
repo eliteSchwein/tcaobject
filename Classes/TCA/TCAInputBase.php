@@ -4,34 +4,35 @@ namespace ThomasLudwig\Tcaobject\TCA;
 
 class TCAInputBase
 {
-    protected string $datasetName = '';
-    protected string $label = '';
-    protected string $type = '';
-    protected string $databaseType = '';
-    protected string $eval = '';
-    protected string $renderType = '';
-    protected string $foreign_table = '';
-    protected string $foreign_table_where = '';
-    protected string $displayCond = '';
+    protected ?string $datasetName = null;
+    protected ?string $label = null;
+    protected ?string $type = null;
+    protected ?string $databaseType = null;
+    protected ?string $eval = null;
+    protected ?string $renderType = null;
+    protected ?string $foreign_table = null;
+    protected ?string $foreign_table_where = null;
+    protected ?string $displayCond = null;
+    protected ?string $special = null;
 
-    protected bool $requiresItems = false;
-    protected bool $visible = true;
-    protected bool $searchable = false;
+    protected ?bool $visible = true;
+    protected ?bool $searchable = false;
+    protected ?bool $exclude = true;
 
-    protected int $size = 30;
-    protected int $maxItems = 9999;
+    protected ?int $size = null;
+    protected ?int $maxItems = null;
 
     protected array $fieldControls = [];
     protected array $items = [];
     protected array $behaviour = [];
     protected array $range = [];
 
-    protected $default = '';
+    protected $default = null;
 
     /**
      * @return string
      */
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -47,7 +48,7 @@ class TCAInputBase
     /**
      * @return string
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -71,7 +72,7 @@ class TCAInputBase
     /**
      * @return int
      */
-    public function getSize(): int
+    public function getSize(): ?int
     {
         return $this->size;
     }
@@ -87,7 +88,7 @@ class TCAInputBase
     /**
      * @return string
      */
-    public function getEval(): string
+    public function getEval(): ?string
     {
         return $this->eval;
     }
@@ -103,7 +104,7 @@ class TCAInputBase
     /**
      * @return string
      */
-    public function getDatasetName(): string
+    public function getDatasetName(): ?string
     {
         return $this->datasetName;
     }
@@ -140,7 +141,7 @@ class TCAInputBase
     /**
      * @return string
      */
-    public function getRenderType(): string
+    public function getRenderType(): ?string
     {
         return $this->renderType;
     }
@@ -164,7 +165,7 @@ class TCAInputBase
     /**
      * @return string
      */
-    public function getDatabaseType(): string
+    public function getDatabaseType(): ?string
     {
         return $this->databaseType;
     }
@@ -172,7 +173,7 @@ class TCAInputBase
     /**
      * @return int
      */
-    public function getMaxItems(): int
+    public function getMaxItems(): ?int
     {
         return $this->maxItems;
     }
@@ -201,9 +202,13 @@ class TCAInputBase
         return $this->items;
     }
 
-    public function addItem($key, $value): void
+    public function addItem($key, $id = null, $icon = null): void
     {
-        $this->items[$key] = $value;
+        $entry = [];
+        $entry = $this->parseInputFragment($entry, $key);
+        $entry = $this->parseInputFragment($entry, $id);
+        $entry = $this->parseInputFragment($entry, $icon);
+        $this->items[] = $entry;
     }
 
     public function removeItemByKey($key): void
@@ -319,7 +324,7 @@ class TCAInputBase
     /**
      * @return string
      */
-    public function getForeignTable(): string
+    public function getForeignTable(): ?string
     {
         return $this->foreign_table;
     }
@@ -327,7 +332,7 @@ class TCAInputBase
     /**
      * @return string
      */
-    public function getForeignTableWhere(): string
+    public function getForeignTableWhere(): ?string
     {
         return $this->foreign_table_where;
     }
@@ -351,7 +356,7 @@ class TCAInputBase
     /**
      * @return string
      */
-    public function getDisplayCond(): string
+    public function getDisplayCond(): ?string
     {
         return $this->displayCond;
     }
@@ -364,15 +369,77 @@ class TCAInputBase
         $this->displayCond = $displayCond;
     }
 
+    /**
+     * @return bool|null
+     */
+    public function isExclude(): ?bool
+    {
+        return $this->exclude;
+    }
+
+    /**
+     * @param bool|null $exclude
+     */
+    public function setExclude(?bool $exclude): void
+    {
+        $this->exclude = $exclude;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSpecial(): ?string
+    {
+        return $this->special;
+    }
+
+    /**
+     * @param string|null $special
+     */
+    public function setSpecial(?string $special): void
+    {
+        $this->special = $special;
+    }
+
+    protected function parseInputFragment(array $array, $fragment) {
+        if($fragment === null) {
+            return $array;
+        }
+        if(is_array($fragment)) {
+            $array[key($fragment)] = $fragment[key($fragment)];
+        } else {
+            $array[] = $fragment;
+        }
+        return $array;
+    }
+
     public function asArray(): array
     {
         $rawArray = [];
+        if(!empty($this->isExclude())) {
+            $rawArray['exclude'] = $this->isExclude();
+        }
+        if(!empty($this->getLabel())) {
+            $rawArray['label'] = $this->getLabel();
+        }
+        if(!empty($this->getDisplayCond())) {
+            $rawArray['display_cond'] = $this->getDisplayCond();
+        }
         foreach ((array) $this as $key => $value) {
             $cleanedUpKey = str_replace('*', '', $key);
-            $cleanedUpKey = trim($cleanedUpKey);
-            $rawArray[$cleanedUpKey] = $value;
+            if(!is_array($cleanedUpKey)) {
+                $cleanedUpKey = trim($cleanedUpKey);
+            }
+            if((is_array($value) && sizeof($value) > 0) ||
+                (!is_array($value) && !is_null($value))) {
+                $rawArray['config'][$cleanedUpKey] = $value;
+            }
         }
-        unset($rawArray['datasetName']);
+        unset($rawArray['config']['datasetName']);
+        unset($rawArray['config']['displayCond']);
+        unset($rawArray['config']['label']);
+        unset($rawArray['config']['searchable']);
+        unset($rawArray['config']['exclude']);
         return $rawArray;
     }
 }

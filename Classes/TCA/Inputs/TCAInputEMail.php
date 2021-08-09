@@ -6,7 +6,8 @@ use ThomasLudwig\Tcaobject\TCA\TCAInputBase;
 
 class TCAInputEMail extends TCAInputBase
 {
-    protected string $type = 'input';
-    protected string $eval = 'nospace,email';
-    protected bool $searchable = true;
+    protected ?string $type = 'input';
+    protected ?string $eval = 'nospace,email';
+    protected ?bool $searchable = true;
+    protected ?int $size = 30;
 }

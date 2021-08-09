@@ -156,9 +156,9 @@ class TCA
         }
     }
 
-    public function addEnableColumn(string $enableColumn): void
+    public function addEnableColumn($key, $value): void
     {
-        array_push($this->enableColumns, $enableColumn);
+        $this->enableColumns[$key] = $value;
     }
 
     /**
