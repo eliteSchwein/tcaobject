@@ -47,10 +47,12 @@ class TCACropVariant
 
     /**
      * @param TCACropArea $cropArea
+     * @return TCACropVariant
      */
-    public function setCropArea(TCACropArea $cropArea): void
+    public function setCropArea(TCACropArea $cropArea): TCACropVariant
     {
         $this->cropArea = $cropArea;
+        return $this;
     }
 
     /**
@@ -63,18 +65,22 @@ class TCACropVariant
 
     /**
      * @param string|null $name
+     * @return TCACropVariant
      */
-    public function setName(?string $name): void
+    public function setName(?string $name): TCACropVariant
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
      * @param string|null $title
+     * @return TCACropVariant
      */
-    public function setTitle(?string $title): void
+    public function setTitle(?string $title): TCACropVariant
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
@@ -95,19 +101,23 @@ class TCACropVariant
 
     /**
      * @param array $allowedAspectRatios
+     * @return TCACropVariant
      */
-    public function setAllowedAspectRatios(array $allowedAspectRatios): void
+    public function setAllowedAspectRatios(array $allowedAspectRatios): TCACropVariant
     {
         $this->allowedAspectRatios = $allowedAspectRatios;
+        return $this;
     }
 
     /**
      * @param $key
      * @param $value
+     * @return TCACropVariant
      */
-    public function addAllowedAspectRatio($key, $value)
+    public function addAllowedAspectRatio($key, $value): TCACropVariant
     {
         $this->allowedAspectRatios[$key] = $value->asArray();
+        return $this;
     }
 
     /**
@@ -120,10 +130,12 @@ class TCACropVariant
 
     /**
      * @param string|null $selectedRatio
+     * @return TCACropVariant
      */
-    public function setSelectedRatio(?string $selectedRatio): void
+    public function setSelectedRatio(?string $selectedRatio): TCACropVariant
     {
         $this->selectedRatio = $selectedRatio;
+        return $this;
     }
 
     /**

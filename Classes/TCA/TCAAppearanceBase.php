@@ -1,6 +1,6 @@
 <?php
 
-namespace ThomasLudwig\Tcaobject\TCA\Inputs;
+namespace ThomasLudwig\Tcaobject\TCA;
 
 /**
  *
@@ -19,9 +19,10 @@ class TCAAppearanceBase
     /**
      * @param null $value
      */
-    public function setValue($value): void
+    public function setValue($value): TCAAppearanceBase
     {
         $this->value = $value;
+        return $this;
     }
 
     /**
@@ -30,14 +31,6 @@ class TCAAppearanceBase
     public function getValue()
     {
         return $this->value;
-    }
-
-    /**
-     * @param string $type
-     */
-    public function setType(string $type): void
-    {
-        $this->type = $type;
     }
 
     /**

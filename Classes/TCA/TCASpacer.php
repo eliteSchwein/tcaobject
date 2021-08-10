@@ -14,10 +14,12 @@ class TCASpacer
 
     /**
      * @param string|null $name
+     * @return TCASpacer
      */
-    public function setName(?string $name): void
+    public function setName(?string $name): TCASpacer
     {
         $this->name = $name;
+        return $this;
     }
 
     /**

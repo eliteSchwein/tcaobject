@@ -28,9 +28,12 @@ class TCAInputDouble extends TCAInputBase
 
     /**
      * @param int $digits
+     * @return TCAInputDouble
      */
-    public function setDigits(int $digits) {
+    public function setDigits(int $digits): TCAInputDouble
+    {
         $this->eval = 'double'.$digits;
+        return $this;
     }
 
 }

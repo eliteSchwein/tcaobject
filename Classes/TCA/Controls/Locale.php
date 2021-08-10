@@ -30,10 +30,12 @@ class Locale
 
     /**
      * @param ?string $languageField
+     * @return Locale
      */
-    public function setLanguageField(?string $languageField): void
+    public function setLanguageField(?string $languageField): Locale
     {
         $this->languageField = $languageField;
+        return $this;
     }
 
     /**
@@ -54,18 +56,22 @@ class Locale
 
     /**
      * @param ?string $transOrigPointerField
+     * @return Locale
      */
-    public function setTransOrigPointerField(?string $transOrigPointerField): void
+    public function setTransOrigPointerField(?string $transOrigPointerField): Locale
     {
         $this->transOrigPointerField = $transOrigPointerField;
+        return $this;
     }
 
     /**
      * @param ?string $transOrigDiffSourceField
+     * @return Locale
      */
-    public function setTransOrigDiffSourceField(?string $transOrigDiffSourceField): void
+    public function setTransOrigDiffSourceField(?string $transOrigDiffSourceField): Locale
     {
         $this->transOrigDiffSourceField = $transOrigDiffSourceField;
+        return $this;
     }
 
     /**

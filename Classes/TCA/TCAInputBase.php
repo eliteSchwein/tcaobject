@@ -156,10 +156,12 @@ class TCAInputBase
 
     /**
      * @param string $label
+     * @return TCAInputBase
      */
-    public function setLabel(string $label): void
+    public function setLabel(string $label): TCAInputBase
     {
         $this->label = $label;
+        return $this;
     }
 
     /**
@@ -181,9 +183,10 @@ class TCAInputBase
     /**
      * @param mixed $default
      */
-    public function setDefault($default): void
+    public function setDefault($default): TCAInputBase
     {
         $this->default = $default;
+        return $this;
     }
 
     /**
@@ -196,10 +199,12 @@ class TCAInputBase
 
     /**
      * @param int $size
+     * @return TCAInputBase
      */
-    public function setSize(int $size): void
+    public function setSize(int $size): TCAInputBase
     {
         $this->size = $size;
+        return $this;
     }
 
     /**
@@ -212,10 +217,12 @@ class TCAInputBase
 
     /**
      * @param string $eval
+     * @return TCAInputBase
      */
-    public function setEval(string $eval): void
+    public function setEval(string $eval): TCAInputBase
     {
         $this->eval = $eval;
+        return $this;
     }
 
     /**
@@ -228,10 +235,12 @@ class TCAInputBase
 
     /**
      * @param string $name
+     * @return TCAInputBase
      */
-    public function setName(string $name): void
+    public function setName(string $name): TCAInputBase
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
@@ -244,18 +253,22 @@ class TCAInputBase
 
     /**
      * @param array $fieldControls
+     * @return TCAInputBase
      */
-    public function setFieldControls(array $fieldControls): void
+    public function setFieldControls(array $fieldControls): TCAInputBase
     {
         $this->fieldControl = $fieldControls;
+        return $this;
     }
 
     /**
      * @param TCAFieldControlBase $fieldControl
+     * @return TCAInputBase
      */
-    public function addFieldControl(TCAFieldControlBase $fieldControl): void
+    public function addFieldControl(TCAFieldControlBase $fieldControl): TCAInputBase
     {
         $this->fieldControl[$fieldControl->getType()] = $fieldControl->asArray();
+        return $this;
     }
 
     /**
@@ -268,10 +281,12 @@ class TCAInputBase
 
     /**
      * @param string $renderType
+     * @return TCAInputBase
      */
-    public function setRenderType(string $renderType): void
+    public function setRenderType(string $renderType): TCAInputBase
     {
         $this->renderType = $renderType;
+        return $this;
     }
 
     /**
@@ -300,18 +315,22 @@ class TCAInputBase
 
     /**
      * @param int $maxItems
+     * @return TCAInputBase
      */
-    public function setMaxItems(int $maxItems): void
+    public function setMaxItems(int $maxItems): TCAInputBase
     {
         $this->maxItems = $maxItems;
+        return $this;
     }
 
     /**
      * @param array $items
+     * @return TCAInputBase
      */
-    public function setItems(array $items): void
+    public function setItems(array $items): TCAInputBase
     {
         $this->items = $items;
+        return $this;
     }
 
     /**
@@ -326,32 +345,38 @@ class TCAInputBase
      * @param $key
      * @param null $id
      * @param null $icon
+     * @return TCAInputBase
      */
-    public function addItem($key, $id = null, $icon = null): void
+    public function addItem($key, $id = null, $icon = null): TCAInputBase
     {
         $entry = [];
         $entry = $this->parseInputFragment($entry, $key);
         $entry = $this->parseInputFragment($entry, $id);
         $entry = $this->parseInputFragment($entry, $icon);
         $this->items[] = $entry;
+        return $this;
     }
 
     /**
      * @param $key
+     * @return TCAInputBase
      */
-    public function removeItemByKey($key): void
+    public function removeItemByKey($key): TCAInputBase
     {
         unset($this->items[$key]);
+        return $this;
     }
 
     /**
      * @param $value
+     * @return TCAInputBase
      */
-    public function removeItemByValue($value): void
+    public function removeItemByValue($value): TCAInputBase
     {
         if (($key = array_search($value, $this->items)) !== false) {
             unset($this->items[$key]);
         }
+        return $this;
     }
 
     /**
@@ -364,37 +389,45 @@ class TCAInputBase
 
     /**
      * @param array $behaviour
+     * @return TCAInputBase
      */
-    public function setBehaviour(array $behaviour): void
+    public function setBehaviour(array $behaviour): TCAInputBase
     {
         $this->behaviour = $behaviour;
+        return $this;
     }
 
     /**
      * @param $key
      * @param $value
+     * @return TCAInputBase
      */
-    public function addBehavior($key, $value): void
+    public function addBehavior($key, $value): TCAInputBase
     {
         $this->behaviour[$key] = $value;
+        return $this;
     }
 
     /**
      * @param $key
+     * @return TCAInputBase
      */
-    public function removeBehaviorByKey($key): void
+    public function removeBehaviorByKey($key): TCAInputBase
     {
         unset($this->behaviour[$key]);
+        return $this;
     }
 
     /**
      * @param $value
+     * @return TCAInputBase
      */
-    public function removeBehaviorByValue($value): void
+    public function removeBehaviorByValue($value): TCAInputBase
     {
         if (($key = array_search($value, $this->behaviour)) !== false) {
             unset($this->behaviour[$key]);
         }
+        return $this;
     }
 
     /**
@@ -407,10 +440,12 @@ class TCAInputBase
 
     /**
      * @param null|bool $visible
+     * @return TCAInputBase
      */
-    public function setVisible(?bool $visible): void
+    public function setVisible(?bool $visible): TCAInputBase
     {
         $this->visible = $visible;
+        return $this;
     }
 
     /**
@@ -423,10 +458,12 @@ class TCAInputBase
 
     /**
      * @param bool $searchable
+     * @return TCAInputBase
      */
-    public function setSearchable(bool $searchable): void
+    public function setSearchable(bool $searchable): TCAInputBase
     {
         $this->searchable = $searchable;
+        return $this;
     }
 
     /**
@@ -439,37 +476,45 @@ class TCAInputBase
 
     /**
      * @param array $range
+     * @return TCAInputBase
      */
-    public function setRange(array $range): void
+    public function setRange(array $range): TCAInputBase
     {
         $this->range = $range;
+        return $this;
     }
 
     /**
      * @param $key
      * @param $value
+     * @return TCAInputBase
      */
-    public function addRange($key, $value): void
+    public function addRange($key, $value): TCAInputBase
     {
         $this->range[$key] = $value;
+        return $this;
     }
 
     /**
      * @param $key
+     * @return TCAInputBase
      */
-    public function removeRangeByKey($key): void
+    public function removeRangeByKey($key): TCAInputBase
     {
         unset($this->range[$key]);
+        return $this;
     }
 
     /**
      * @param $value
+     * @return TCAInputBase
      */
-    public function removeRangeByValue($value): void
+    public function removeRangeByValue($value): TCAInputBase
     {
         if (($key = array_search($value, $this->range)) !== false) {
             unset($this->range[$key]);
         }
+        return $this;
     }
 
     /**
@@ -490,18 +535,22 @@ class TCAInputBase
 
     /**
      * @param string $foreign_table
+     * @return TCAInputBase
      */
-    public function setForeignTable(string $foreign_table): void
+    public function setForeignTable(string $foreign_table): TCAInputBase
     {
         $this->foreign_table = $foreign_table;
+        return $this;
     }
 
     /**
      * @param string $foreign_table_where
+     * @return TCAInputBase
      */
-    public function setForeignTableWhere(string $foreign_table_where): void
+    public function setForeignTableWhere(string $foreign_table_where): TCAInputBase
     {
         $this->foreign_table_where = $foreign_table_where;
+        return $this;
     }
 
     /**
@@ -514,10 +563,12 @@ class TCAInputBase
 
     /**
      * @param string $displayCond
+     * @return TCAInputBase
      */
-    public function setDisplayCond(string $displayCond): void
+    public function setDisplayCond(string $displayCond): TCAInputBase
     {
         $this->displayCond = $displayCond;
+        return $this;
     }
 
     /**
@@ -530,10 +581,12 @@ class TCAInputBase
 
     /**
      * @param bool|null $exclude
+     * @return TCAInputBase
      */
-    public function setExclude(?bool $exclude): void
+    public function setExclude(?bool $exclude): TCAInputBase
     {
         $this->exclude = $exclude;
+        return $this;
     }
 
     /**
@@ -546,10 +599,12 @@ class TCAInputBase
 
     /**
      * @param string|null $special
+     * @return TCAInputBase
      */
-    public function setSpecial(?string $special): void
+    public function setSpecial(?string $special): TCAInputBase
     {
         $this->special = $special;
+        return $this;
     }
 
     /**
@@ -562,10 +617,12 @@ class TCAInputBase
 
     /**
      * @param int|null $minItems
+     * @return TCAInputBase
      */
-    public function setMinItems(?int $minItems): void
+    public function setMinItems(?int $minItems): TCAInputBase
     {
         $this->minItems = $minItems;
+        return $this;
     }
 
 
@@ -579,18 +636,22 @@ class TCAInputBase
 
     /**
      * @param string|null $itemsProcFunc
+     * @return TCAInputBase
      */
-    public function setItemsProcFunc(?string $itemsProcFunc): void
+    public function setItemsProcFunc(?string $itemsProcFunc): TCAInputBase
     {
         $this->itemsProcFunc = $itemsProcFunc;
+        return $this;
     }
 
     /**
      * @param array $itemsProcConfig
+     * @return TCAInputBase
      */
-    public function setItemsProcConfig(array $itemsProcConfig): void
+    public function setItemsProcConfig(array $itemsProcConfig): TCAInputBase
     {
         $this->itemsProcConfig = $itemsProcConfig;
+        return $this;
     }
 
     /**
@@ -604,9 +665,12 @@ class TCAInputBase
     /**
      * @param $key
      * @param $value
+     * @return TCAInputBase
      */
-    public function addItemProcConfig($key, $value) {
+    public function addItemProcConfig($key, $value): TCAInputBase
+    {
         $this->itemsProcConfig[$key] = $value;
+        return $this;
     }
 
     /**
@@ -619,10 +683,12 @@ class TCAInputBase
 
     /**
      * @param bool|null $readOnly
+     * @return TCAInputBase
      */
-    public function setReadOnly(?bool $readOnly): void
+    public function setReadOnly(?bool $readOnly): TCAInputBase
     {
         $this->readOnly = $readOnly;
+        return $this;
     }
 
     /**
@@ -643,10 +709,12 @@ class TCAInputBase
 
     /**
      * @param int|null $multiple
+     * @return TCAInputBase
      */
-    public function setMultiple(?int $multiple): void
+    public function setMultiple(?int $multiple): TCAInputBase
     {
         $this->multiple = $multiple;
+        return $this;
     }
 
     /**
@@ -675,18 +743,22 @@ class TCAInputBase
 
     /**
      * @param int|null $autoSizeMax
+     * @return TCAInputBase
      */
-    public function setAutoSizeMax(?int $autoSizeMax): void
+    public function setAutoSizeMax(?int $autoSizeMax): TCAInputBase
     {
         $this->autoSizeMax = $autoSizeMax;
+        return $this;
     }
 
     /**
      * @param int|null $autoSizeMin
+     * @return TCAInputBase
      */
-    public function setAutoSizeMin(?int $autoSizeMin): void
+    public function setAutoSizeMin(?int $autoSizeMin): TCAInputBase
     {
         $this->autoSizeMin = $autoSizeMin;
+        return $this;
     }
 
     /**
@@ -699,18 +771,22 @@ class TCAInputBase
 
     /**
      * @param array $appearance
+     * @return TCAInputBase
      */
-    public function setAppearance(array $appearance): void
+    public function setAppearance(array $appearance): TCAInputBase
     {
         $this->appearance = $appearance;
+        return $this;
     }
 
     /**
      * @param TCAAppearanceBase $appearance
+     * @return TCAInputBase
      */
-    public function addAppearance(TCAAppearanceBase $appearance): void
+    public function addAppearance(TCAAppearanceBase $appearance): TCAInputBase
     {
         $this->appearance[$appearance->getType()] = $appearance->getValue();
+        return $this;
     }
 
     /**

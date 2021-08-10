@@ -39,10 +39,12 @@ class Administration
 
     /**
      * @param ?bool $adminOnly
+     * @return Administration
      */
-    public function setAdminOnly(?bool $adminOnly): void
+    public function setAdminOnly(?bool $adminOnly): Administration
     {
         $this->adminOnly = $adminOnly;
+        return $this;
     }
 
 
@@ -56,10 +58,12 @@ class Administration
 
     /**
      * @param ?string $editLock
+     * @return Administration
      */
-    public function setEditLock(?string $editLock): void
+    public function setEditLock(?string $editLock): Administration
     {
         $this->editlock = $editLock;
+        return $this;
     }
 
     /**
@@ -72,10 +76,12 @@ class Administration
 
     /**
      * @param ?bool $hideAtCopy
+     * @return Administration
      */
-    public function setHideAtCopy(?bool $hideAtCopy): void
+    public function setHideAtCopy(?bool $hideAtCopy): Administration
     {
         $this->hideAtCopy = $hideAtCopy;
+        return $this;
     }
 
     /**
@@ -88,10 +94,12 @@ class Administration
 
     /**
      * @param ?bool $hideTable
+     * @return Administration
      */
-    public function setHideTable(?bool $hideTable): void
+    public function setHideTable(?bool $hideTable): Administration
     {
         $this->hideTable = $hideTable;
+        return $this;
     }
 
     /**

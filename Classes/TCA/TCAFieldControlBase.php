@@ -26,10 +26,12 @@ class TCAFieldControlBase
 
     /**
      * @param bool $disabled
+     * @return TCAFieldControlBase
      */
-    public function setDisabled(bool $disabled): void
+    public function setDisabled(bool $disabled): TCAFieldControlBase
     {
         $this->disabled = $disabled;
+        return $this;
     }
 
     /**

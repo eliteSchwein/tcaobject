@@ -35,10 +35,12 @@ class TCAPaletteBase
 
     /**
      * @param string|null $name
+     * @return TCAPaletteBase
      */
-    public function setName(?string $name): void
+    public function setName(?string $name): TCAPaletteBase
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
@@ -51,10 +53,12 @@ class TCAPaletteBase
 
     /**
      * @param string|null $label
+     * @return TCAPaletteBase
      */
-    public function setLabel(?string $label): void
+    public function setLabel(?string $label): TCAPaletteBase
     {
         $this->label = $label;
+        return $this;
     }
 
     /**
@@ -67,10 +71,12 @@ class TCAPaletteBase
 
     /**
      * @param bool|null $hidden
+     * @return TCAPaletteBase
      */
-    public function setHidden(?bool $hidden): void
+    public function setHidden(?bool $hidden): TCAPaletteBase
     {
         $this->hidden = $hidden;
+        return $this;
     }
 
     /**
@@ -83,18 +89,22 @@ class TCAPaletteBase
 
     /**
      * @param string|null $items
+     * @return TCAPaletteBase
      */
-    public function setItems(?string $items): void
+    public function setItems(?string $items): TCAPaletteBase
     {
         $this->items = $items;
+        return $this;
     }
 
     /**
      * @param string|null $item
+     * @return TCAPaletteBase
      */
-    public function addItem(?string $item): void
+    public function addItem(?string $item): TCAPaletteBase
     {
        $this->items = $this->items.','.$item;
+       return $this;
     }
 
     /**

@@ -59,34 +59,42 @@ class TCACropArea
 
     /**
      * @param float $height
+     * @return TCACropArea
      */
-    public function setHeight(float $height): void
+    public function setHeight(float $height): TCACropArea
     {
         $this->height = $height;
+        return $this;
     }
 
     /**
      * @param float $width
+     * @return TCACropArea
      */
-    public function setWidth(float $width): void
+    public function setWidth(float $width): TCACropArea
     {
         $this->width = $width;
+        return $this;
     }
 
     /**
      * @param float $x
+     * @return TCACropArea
      */
-    public function setX(float $x): void
+    public function setX(float $x): TCACropArea
     {
         $this->x = $x;
+        return $this;
     }
 
     /**
      * @param float $y
+     * @return TCACropArea
      */
-    public function setY(float $y): void
+    public function setY(float $y): TCACropArea
     {
         $this->y = $y;
+        return $this;
     }
 
     /**

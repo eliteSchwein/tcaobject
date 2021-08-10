@@ -108,10 +108,12 @@ class TCA
 
     /**
      * @param string $title
+     * @return TCA
      */
-    public function setTitle(string $title): void
+    public function setTitle(string $title): TCA
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
@@ -124,10 +126,12 @@ class TCA
 
     /**
      * @param string $label
+     * @return TCA
      */
-    public function setLabel(string $label): void
+    public function setLabel(string $label): TCA
     {
         $this->label = $label;
+        return $this;
     }
 
     /**
@@ -140,10 +144,12 @@ class TCA
 
     /**
      * @param string $iconFile
+     * @return TCA
      */
-    public function setIconFile(string $iconFile): void
+    public function setIconFile(string $iconFile): TCA
     {
         $this->iconFile = $iconFile;
+        return $this;
     }
 
     /**
@@ -164,38 +170,49 @@ class TCA
 
     /**
      * @param array $components
+     * @return TCA
      */
-    public function setComponents(array $components): void
+    public function setComponents(array $components): TCA
     {
         $this->components = $components;
+        return $this;
     }
 
     /**
      * @param TCAPaletteBase $palette
+     * @return TCA
      */
-    public function addPalette(TCAPaletteBase $palette): void
+    public function addPalette(TCAPaletteBase $palette): TCA
     {
         $this->components[] = $palette;
+        return $this;
     }
 
     /**
      * @param TCAInputBase $input
+     * @return TCA
      */
-    public function addInput(TCAInputBase $input) {
+    public function addInput(TCAInputBase $input): TCA
+    {
         $this->components[] = $input;
+        return $this;
     }
 
     /**
      * @param TCASpacer $spacer
+     * @return TCA
      */
-    public function addSpacer(TCASpacer $spacer) {
+    public function addSpacer(TCASpacer $spacer): TCA
+    {
         $this->components[] = $spacer;
+        return $this;
     }
 
     /**
      * @param string $name
+     * @return TCA
      */
-    public function removeInput(string $name)
+    public function removeInput(string $name): TCA
     {
         foreach ($this->components as $key => $value) {
             if($value instanceof TCAInputBase &&
@@ -203,30 +220,37 @@ class TCA
                 unset($this->components[$key]);
             }
         }
+        return $this;
     }
 
     /**
      * @param string $name
+     * @return TCA
      */
-    public function removePalette(string $name) {
+    public function removePalette(string $name): TCA
+    {
         foreach ($this->components as $key => $value) {
             if($value instanceof TCAPaletteBase &&
                 $value->getName() === $name) {
                 unset($this->components[$key]);
             }
         }
+        return $this;
     }
 
     /**
      * @param string $name
+     * @return TCA
      */
-    public function removeSpacer(string $name) {
+    public function removeSpacer(string $name): TCA
+    {
         foreach($this->components as $key => $value) {
             if($value instanceof TCASpacer &&
                 $value->getName() === $name) {
                 unset($this->components[$key]);
             }
         }
+        return $this;
     }
 
     /**
@@ -255,29 +279,35 @@ class TCA
 
     /**
      * @param array $enableColumns
+     * @return TCA
      */
-    public function setEnableColumns(array $enableColumns): void
+    public function setEnableColumns(array $enableColumns): TCA
     {
         $this->enableColumns = $enableColumns;
+        return $this;
     }
 
     /**
      * @param string $enableColumn
+     * @return TCA
      */
-    public function removeEnableColumn(string $enableColumn): void
+    public function removeEnableColumn(string $enableColumn): TCA
     {
         if (($key = array_search($enableColumn, $this->enableColumns)) !== false) {
             unset($this->enableColumns[$key]);
         }
+        return $this;
     }
 
     /**
      * @param $key
      * @param $value
+     * @return TCA
      */
-    public function addEnableColumn($key, $value): void
+    public function addEnableColumn($key, $value): TCA
     {
         $this->enableColumns[$key] = $value;
+        return $this;
     }
 
     /**
@@ -290,10 +320,12 @@ class TCA
 
     /**
      * @param string $descriptionColumn
+     * @return TCA
      */
-    public function setDescriptionColumn(string $descriptionColumn): void
+    public function setDescriptionColumn(string $descriptionColumn): TCA
     {
         $this->descriptionColumn = $descriptionColumn;
+        return $this;
     }
 
     /**
@@ -306,10 +338,12 @@ class TCA
 
     /**
      * @param Misc $misc
+     * @return TCA
      */
-    public function setMisc(Misc $misc): void
+    public function setMisc(Misc $misc): TCA
     {
         $this->misc = $misc;
+        return $this;
     }
 
     /**
@@ -322,10 +356,12 @@ class TCA
 
     /**
      * @param Administration $administration
+     * @return TCA
      */
-    public function setAdministration(Administration $administration): void
+    public function setAdministration(Administration $administration): TCA
     {
         $this->administration = $administration;
+        return $this;
     }
 
     /**
@@ -338,10 +374,12 @@ class TCA
 
     /**
      * @param Locale $locale
+     * @return TCA
      */
-    public function setLocale(Locale $locale): void
+    public function setLocale(Locale $locale): TCA
     {
         $this->locale = $locale;
+        return $this;
     }
 
     /**
@@ -354,10 +392,12 @@ class TCA
 
     /**
      * @param string $databaseTable
+     * @return TCA
      */
-    public function setDatabaseTable(string $databaseTable): void
+    public function setDatabaseTable(string $databaseTable): TCA
     {
         $this->databaseTable = $databaseTable;
+        return $this;
     }
 
     /**
@@ -371,9 +411,10 @@ class TCA
     /**
      * @param mixed $label_userFunc
      */
-    public function setLabelUserFunc($label_userFunc): void
+    public function setLabelUserFunc($label_userFunc): TCA
     {
         $this->label_userFunc = $label_userFunc;
+        return $this;
     }
 
     /**
@@ -386,10 +427,12 @@ class TCA
 
     /**
      * @param Interfaces $interfaces
+     * @return TCA
      */
-    public function setInterfaces(Interfaces $interfaces): void
+    public function setInterfaces(Interfaces $interfaces): TCA
     {
         $this->interfaces = $interfaces;
+        return $this;
     }
 
     /**

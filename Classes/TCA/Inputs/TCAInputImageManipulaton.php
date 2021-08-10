@@ -34,17 +34,22 @@ class TCAInputImageManipulaton extends TCAInputBase
 
     /**
      * @param array $cropVariants
+     * @return TCAInputImageManipulaton
      */
-    public function setCropVariants(array $cropVariants): void
+    public function setCropVariants(array $cropVariants): TCAInputImageManipulaton
     {
         $this->cropVariants = $cropVariants;
+        return $this;
     }
 
     /**
      * @param TCACropVariant $cropVariant
+     * @return TCAInputImageManipulaton
      */
-    public function addCropVariant(TCACropVariant $cropVariant) {
+    public function addCropVariant(TCACropVariant $cropVariant): TCAInputImageManipulaton
+    {
         $this->cropVariants[$cropVariant->getName()] = $cropVariant->asArray();
+        return $this;
     }
 
     /**
@@ -57,20 +62,24 @@ class TCAInputImageManipulaton extends TCAInputBase
 
     /**
      * @param string|null $allowedExtensions
+     * @return TCAInputImageManipulaton
      */
-    public function setAllowedExtensions(?string $allowedExtensions): void
+    public function setAllowedExtensions(?string $allowedExtensions): TCAInputImageManipulaton
     {
         $this->allowedExtensions = $allowedExtensions;
+        return $this;
     }
 
     /**
      * @param string $allowedExtensions
+     * @return TCAInputImageManipulaton
      */
-    public function addAllowedExtensions(string $allowedExtensions)
+    public function addAllowedExtensions(string $allowedExtensions): TCAInputImageManipulaton
     {
         if($this->allowedExtensions === null) {
             $this->allowedExtensions = '';
         }
         $this->allowedExtensions .= ','.$allowedExtensions;
+        return $this;
     }
 }

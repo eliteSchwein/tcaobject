@@ -48,10 +48,12 @@ class TCAInputSelect extends TCAInputBase
 
     /**
      * @param string|null $MM
+     * @return TCAInputSelect
      */
-    public function setRelation(?string $MM): void
+    public function setRelation(?string $MM): TCAInputSelect
     {
         $this->MM = $MM;
+        return $this;
     }
 
     /**
@@ -64,23 +66,27 @@ class TCAInputSelect extends TCAInputBase
 
     /**
      * @param array $multiSelectFilterItems
+     * @return TCAInputSelect
      */
-    public function setMultiSelectFilterItems(array $multiSelectFilterItems): void
+    public function setMultiSelectFilterItems(array $multiSelectFilterItems): TCAInputSelect
     {
         $this->multiSelectFilterItems = $multiSelectFilterItems;
+        return $this;
     }
 
     /**
      * @param $key
      * @param null $id
      * @param null $icon
+     * @return TCAInputSelect
      */
-    public function addMultiSelectFilterItem($key, $id = null, $icon = null): void
+    public function addMultiSelectFilterItem($key, $id = null, $icon = null): TCAInputSelect
     {
         $entry = [];
         $entry = $this->parseInputFragment($entry, $key);
         $entry = $this->parseInputFragment($entry, $id);
         $entry = $this->parseInputFragment($entry, $icon);
         $this->multiSelectFilterItems[] = $entry;
+        return $this;
     }
 }

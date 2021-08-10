@@ -2,7 +2,7 @@
 
 namespace ThomasLudwig\Tcaobject\TCA\Inputs\Appearance;
 
-use ThomasLudwig\Tcaobject\TCA\Inputs\TCAAppearanceBase;
+use ThomasLudwig\Tcaobject\TCA\TCAAppearanceBase;
 
 /**
  *

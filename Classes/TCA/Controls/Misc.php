@@ -40,10 +40,12 @@ class Misc
 
     /**
      * @param ?string $tstamp
+     * @return Misc
      */
-    public function setTimeStamp(?string $tstamp): void
+    public function setTimeStamp(?string $tstamp): Misc
     {
         $this->tstamp = $tstamp;
+        return $this;
     }
 
     /**
@@ -56,10 +58,12 @@ class Misc
 
     /**
      * @param ?string $crdate
+     * @return Misc
      */
-    public function setCreateDate(?string $crdate): void
+    public function setCreateDate(?string $crdate): Misc
     {
         $this->crdate = $crdate;
+        return $this;
     }
 
     /**
@@ -72,10 +76,12 @@ class Misc
 
     /**
      * @param ?string $cruser_id
+     * @return Misc
      */
-    public function setCreateUserId(?string $cruser_id): void
+    public function setCreateUserId(?string $cruser_id): Misc
     {
         $this->cruser_id = $cruser_id;
+        return $this;
     }
 
     /**
@@ -88,10 +94,12 @@ class Misc
 
     /**
      * @param ?bool $versioning
+     * @return Misc
      */
-    public function setVersioning(?bool $versioning): void
+    public function setVersioning(?bool $versioning): Misc
     {
         $this->versioningWS = $versioning;
+        return $this;
     }
 
     /**
@@ -104,10 +112,12 @@ class Misc
 
     /**
      * @param ?int $rootLevel
+     * @return Misc
      */
-    public function setRootLevel(?int $rootLevel): void
+    public function setRootLevel(?int $rootLevel): Misc
     {
         $this->rootLevel = $rootLevel;
+        return $this;
     }
 
     /**

@@ -56,10 +56,12 @@ class TCAInputText extends TCAInputBase
 
     /**
      * @param int $rows
+     * @return TCAInputText
      */
-    public function setRows(int $rows): void
+    public function setRows(int $rows): TCAInputText
     {
         $this->rows = $rows;
+        return $this;
     }
 
     /**
@@ -72,10 +74,12 @@ class TCAInputText extends TCAInputBase
 
     /**
      * @param int $cols
+     * @return TCAInputText
      */
-    public function setColumns(int $cols): void
+    public function setColumns(int $cols): TCAInputText
     {
         $this->cols = $cols;
+        return $this;
     }
 
     /**
@@ -88,10 +92,12 @@ class TCAInputText extends TCAInputBase
 
     /**
      * @param string $richTextConfiguration
+     * @return TCAInputText
      */
-    public function setRichTextConfiguration(string $richTextConfiguration): void
+    public function setRichTextConfiguration(string $richTextConfiguration): TCAInputText
     {
         $this->richtextConfiguration = $richTextConfiguration;
+        return $this;
     }
 
     /**
@@ -104,9 +110,11 @@ class TCAInputText extends TCAInputBase
 
     /**
      * @param bool $richText
+     * @return TCAInputText
      */
-    public function setRichText(bool $richText): void
+    public function setRichText(bool $richText): TCAInputText
     {
         $this->enableRichtext = $richText;
+        return $this;
     }
 }

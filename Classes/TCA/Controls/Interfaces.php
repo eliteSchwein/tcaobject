@@ -34,18 +34,22 @@ class Interfaces
 
     /**
      * @param int $maxDBListItems
+     * @return Interfaces
      */
-    public function setMaxDBListItems(int $maxDBListItems): void
+    public function setMaxDBListItems(int $maxDBListItems): Interfaces
     {
         $this->maxDBListItems = $maxDBListItems;
+        return $this;
     }
 
     /**
      * @param int $maxSingleDBListItems
+     * @return Interfaces
      */
-    public function setMaxSingleDBListItems(int $maxSingleDBListItems): void
+    public function setMaxSingleDBListItems(int $maxSingleDBListItems): Interfaces
     {
         $this->maxSingleDBListItems = $maxSingleDBListItems;
+        return $this;
     }
 
     /**
