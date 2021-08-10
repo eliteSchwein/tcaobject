@@ -39,17 +39,14 @@ class TCA
         'palettes' => []
     ];
 
-    public function __construct()
+    public function __construct($useLabelUserFunc = false)
     {
         $this->misc = new Misc();
         $this->administration = new Administration();
         $this->locale = new Locale();
         $this->interfaces = new Interfaces();
 
-        $labelUserFuncTest = [];
-        $this->labelUserFunc($labelUserFuncTest);
-
-        if(!empty($labelUserFuncTest)) {
+        if($useLabelUserFunc) {
             $this->label_userFunc = get_class($this) . '->labelUserFunc';
         }
     }

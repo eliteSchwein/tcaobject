@@ -39,11 +39,8 @@ class TCAInputBase
 
     protected $default = null;
 
-    function __construct() {
-        $itemsProcFuncTest = [];
-        $this->itemsProcFunc($itemsProcFuncTest);
-
-        if(!empty($labelProcFuncTest)) {
+    function __construct($useItemsProcFunc = false) {
+        if($useItemsProcFunc) {
             $this->itemsProcFunc = get_class($this) . '->itemsProcFunc';
         }
     }
