@@ -2,7 +2,12 @@
 
 namespace ThomasLudwig\Tcaobject\TCA\Inputs;
 
-class TCAInputCustom extends \ThomasLudwig\Tcaobject\TCA\TCAInputBase
+use ThomasLudwig\Tcaobject\TCA\TCAInputBase;
+
+/**
+ *
+ */
+class TCAInputCustom extends TCAInputBase
 {
     /**
      * @param string $eval

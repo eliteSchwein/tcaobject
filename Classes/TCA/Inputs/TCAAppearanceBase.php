@@ -2,9 +2,18 @@
 
 namespace ThomasLudwig\Tcaobject\TCA\Inputs;
 
+/**
+ *
+ */
 class TCAAppearanceBase
 {
+    /**
+     * @var string
+     */
     protected string $type = '';
+    /**
+     * @var null
+     */
     protected $value = null;
 
     /**

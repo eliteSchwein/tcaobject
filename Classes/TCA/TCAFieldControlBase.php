@@ -2,9 +2,18 @@
 
 namespace ThomasLudwig\Tcaobject\TCA;
 
+/**
+ *
+ */
 class TCAFieldControlBase
 {
+    /**
+     * @var string
+     */
     protected string $type = '';
+    /**
+     * @var bool
+     */
     protected bool $disabled = false;
 
     /**
@@ -31,6 +40,9 @@ class TCAFieldControlBase
         return $this->type;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         $rawArray = [];

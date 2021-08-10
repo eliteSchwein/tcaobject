@@ -8,9 +8,19 @@ use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputDateTimeInteger;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputSelect;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 
+/**
+ *
+ */
 class DefaultTCA extends TCA
 {
+    /**
+     * @var array
+     */
     protected array $inputs = [];
+
+    /**
+     * @param null $table
+     */
     public function __construct($table = null)
     {
         parent::__construct();

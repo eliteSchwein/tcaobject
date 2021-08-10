@@ -6,27 +6,71 @@ use ThomasLudwig\Tcaobject\TCA\Controls\Administration;
 use ThomasLudwig\Tcaobject\TCA\Controls\Interfaces;
 use ThomasLudwig\Tcaobject\TCA\Controls\Locale;
 use ThomasLudwig\Tcaobject\TCA\Controls\Misc;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 
+/**
+ *
+ */
 class TCA
 {
+    /**
+     * @var string
+     */
     protected string $title = '';
+    /**
+     * @var string
+     */
     protected string $label = '';
+    /**
+     * @var string
+     */
     protected string $iconFile = '';
+    /**
+     * @var string
+     */
     protected string $descriptionColumn = '';
+    /**
+     * @var string
+     */
     protected string $delete = 'deleted';
+    /**
+     * @var string
+     */
     protected string $databaseTable = '';
 
+    /**
+     * @var array
+     */
     protected array $components = [];
+    /**
+     * @var array
+     */
     protected array $enableColumns = [];
 
+    /**
+     * @var Misc
+     */
     protected Misc $misc;
+    /**
+     * @var Administration
+     */
     protected Administration $administration;
+    /**
+     * @var Locale
+     */
     protected Locale $locale;
+    /**
+     * @var Interfaces
+     */
     protected Interfaces $interfaces;
 
+    /**
+     * @var mixed|null
+     */
     protected $label_userFunc = null;
 
+    /**
+     * @var array
+     */
     protected array $rawArray = [
         'ctrl' => [
             'searchFields' => ''
@@ -39,7 +83,10 @@ class TCA
         'palettes' => []
     ];
 
-    public function __construct($useLabelUserFunc = false)
+    /**
+     * @param bool $useLabelUserFunc
+     */
+    public function __construct(bool $useLabelUserFunc = false)
     {
         $this->misc = new Misc();
         $this->administration = new Administration();
@@ -123,19 +170,31 @@ class TCA
         $this->components = $components;
     }
 
+    /**
+     * @param TCAPaletteBase $palette
+     */
     public function addPalette(TCAPaletteBase $palette): void
     {
         $this->components[] = $palette;
     }
 
+    /**
+     * @param TCAInputBase $input
+     */
     public function addInput(TCAInputBase $input) {
         $this->components[] = $input;
     }
 
+    /**
+     * @param TCASpacer $spacer
+     */
     public function addSpacer(TCASpacer $spacer) {
         $this->components[] = $spacer;
     }
 
+    /**
+     * @param string $name
+     */
     public function removeInput(string $name)
     {
         foreach ($this->components as $key => $value) {
@@ -146,6 +205,9 @@ class TCA
         }
     }
 
+    /**
+     * @param string $name
+     */
     public function removePalette(string $name) {
         foreach ($this->components as $key => $value) {
             if($value instanceof TCAPaletteBase &&
@@ -155,6 +217,9 @@ class TCA
         }
     }
 
+    /**
+     * @param string $name
+     */
     public function removeSpacer(string $name) {
         foreach($this->components as $key => $value) {
             if($value instanceof TCASpacer &&
@@ -196,6 +261,9 @@ class TCA
         $this->enableColumns = $enableColumns;
     }
 
+    /**
+     * @param string $enableColumn
+     */
     public function removeEnableColumn(string $enableColumn): void
     {
         if (($key = array_search($enableColumn, $this->enableColumns)) !== false) {
@@ -203,6 +271,10 @@ class TCA
         }
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function addEnableColumn($key, $value): void
     {
         $this->enableColumns[$key] = $value;
@@ -320,6 +392,9 @@ class TCA
         $this->interfaces = $interfaces;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         $this->parseSection('ctrl', $this->administration->asArray());
@@ -346,6 +421,10 @@ class TCA
 
         return $this->rawArray;
     }
+
+    /**
+     *
+     */
     protected function parseComponents() {
         foreach ($this->getComponents() as $component) {
             $dataname = $component->getName();
@@ -379,6 +458,10 @@ class TCA
         $this->rawArray['types']['1']['showitem'] = $visibleList;
     }
 
+    /**
+     * @param $inArray
+     * @param $section
+     */
     protected function parseSection($inArray, $section) {
         foreach ((array) $section as $key => $value){
             $cleanedUpKey = str_replace('*', '', $key);

@@ -2,12 +2,27 @@
 
 namespace ThomasLudwig\Tcaobject\TCA;
 
+/**
+ *
+ */
 class TCAPaletteBase
 {
+    /**
+     * @var string|null
+     */
     protected ?string $name = '';
+    /**
+     * @var string|null
+     */
     protected ?string $label = '';
+    /**
+     * @var string|null
+     */
     protected ?string $items = '';
 
+    /**
+     * @var bool|null
+     */
     protected ?bool $hidden = null;
 
     /**
@@ -82,6 +97,9 @@ class TCAPaletteBase
        $this->items = $this->items.','.$item;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         $rawArray = [];

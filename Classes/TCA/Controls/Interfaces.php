@@ -2,9 +2,18 @@
 
 namespace ThomasLudwig\Tcaobject\TCA\Controls;
 
+/**
+ *
+ */
 class Interfaces
 {
+    /**
+     * @var int
+     */
     protected int $maxDBListItems = 20;
+    /**
+     * @var int
+     */
     protected int $maxSingleDBListItems = 100;
 
     /**
@@ -39,6 +48,9 @@ class Interfaces
         $this->maxSingleDBListItems = $maxSingleDBListItems;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         $rawArray = [];

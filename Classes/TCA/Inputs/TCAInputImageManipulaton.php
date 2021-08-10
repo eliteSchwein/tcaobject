@@ -5,11 +5,23 @@ namespace ThomasLudwig\Tcaobject\TCA\Inputs;
 use ThomasLudwig\Tcaobject\TCA\Inputs\Options\TCACropVariant;
 use ThomasLudwig\Tcaobject\TCA\TCAInputBase;
 
+/**
+ *
+ */
 class TCAInputImageManipulaton extends TCAInputBase
 {
+    /**
+     * @var string|null
+     */
     protected ?string $type = 'imageManipulation';
+    /**
+     * @var string|null
+     */
     protected ?string $allowedExtensions = null;
 
+    /**
+     * @var array
+     */
     protected array $cropVariants = [];
 
     /**
@@ -28,6 +40,9 @@ class TCAInputImageManipulaton extends TCAInputBase
         $this->cropVariants = $cropVariants;
     }
 
+    /**
+     * @param TCACropVariant $cropVariant
+     */
     public function addCropVariant(TCACropVariant $cropVariant) {
         $this->cropVariants[$cropVariant->getName()] = $cropVariant->asArray();
     }
@@ -48,6 +63,9 @@ class TCAInputImageManipulaton extends TCAInputBase
         $this->allowedExtensions = $allowedExtensions;
     }
 
+    /**
+     * @param string $allowedExtensions
+     */
     public function addAllowedExtensions(string $allowedExtensions)
     {
         if($this->allowedExtensions === null) {

@@ -4,16 +4,46 @@ namespace ThomasLudwig\Tcaobject\TCA\Inputs;
 
 use ThomasLudwig\Tcaobject\TCA\TCAInputBase;
 
+/**
+ *
+ */
 class TCAInputText extends TCAInputBase
 {
+    /**
+     * @var string|null
+     */
     protected ?string $type = 'text';
+    /**
+     * @var string|null
+     */
     protected ?string $eval = 'trim';
+    /**
+     * @var string|null
+     */
     protected ?string $richtextConfiguration = 'default';
+    /**
+     * @var bool
+     */
     protected bool $enableRichtext = false;
+    /**
+     * @var bool|null
+     */
     protected ?bool $searchable = true;
+    /**
+     * @var int|null
+     */
     protected ?int $size = -1;
+    /**
+     * @var int
+     */
     protected int $cols = 40;
+    /**
+     * @var int
+     */
     protected int $rows = 15;
+    /**
+     * @var string
+     */
     protected $default = '';
 
     /**

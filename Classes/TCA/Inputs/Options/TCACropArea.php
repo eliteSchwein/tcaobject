@@ -2,12 +2,27 @@
 
 namespace ThomasLudwig\Tcaobject\TCA\Inputs\Options;
 
+/**
+ *
+ */
 class TCACropArea
 {
 
+    /**
+     * @var float
+     */
     protected float $x = 0.0;
+    /**
+     * @var float
+     */
     protected float $y = 0.0;
+    /**
+     * @var float
+     */
     protected float $width = 1.0;
+    /**
+     * @var float
+     */
     protected float $height = 1.0;
 
     /**
@@ -74,6 +89,9 @@ class TCACropArea
         $this->y = $y;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         $rawArray = [];

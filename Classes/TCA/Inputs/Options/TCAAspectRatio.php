@@ -2,10 +2,22 @@
 
 namespace ThomasLudwig\Tcaobject\TCA\Inputs\Options;
 
+/**
+ *
+ */
 class TCAAspectRatio
 {
+    /**
+     * @var string
+     */
     protected string $name = '';
+    /**
+     * @var string
+     */
     protected string $title = '';
+    /**
+     * @var float
+     */
     protected float $value = 0.0;
 
     /**
@@ -56,6 +68,9 @@ class TCAAspectRatio
         $this->value = $value;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         return [

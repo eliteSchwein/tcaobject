@@ -2,8 +2,14 @@
 
 namespace ThomasLudwig\Tcaobject\TCA;
 
+/**
+ *
+ */
 class TCASpacer
 {
+    /**
+     * @var string|null
+     */
     protected ?string $name = '';
 
     /**
@@ -22,6 +28,9 @@ class TCASpacer
         return $this->name;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         return ['--linebreak--'];

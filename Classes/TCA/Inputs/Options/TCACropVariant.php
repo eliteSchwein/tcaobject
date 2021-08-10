@@ -2,16 +2,37 @@
 
 namespace ThomasLudwig\Tcaobject\TCA\Inputs\Options;
 
+/**
+ *
+ */
 class TCACropVariant
 {
+    /**
+     * @var string|null
+     */
     protected ?string $selectedRatio = null;
+    /**
+     * @var string|null
+     */
     protected ?string $name = null;
+    /**
+     * @var string|null
+     */
     protected ?string $title = null;
 
+    /**
+     * @var array
+     */
     protected array $allowedAspectRatios = [];
 
+    /**
+     * @var TCACropArea
+     */
     protected TCACropArea $cropArea;
 
+    /**
+     *
+     */
     public function __construct() {
         $this->cropArea = new TCACropArea();
     }
@@ -80,6 +101,10 @@ class TCACropVariant
         $this->allowedAspectRatios = $allowedAspectRatios;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function addAllowedAspectRatio($key, $value)
     {
         $this->allowedAspectRatios[$key] = $value->asArray();
@@ -101,6 +126,9 @@ class TCACropVariant
         $this->selectedRatio = $selectedRatio;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         $rawArray = [];

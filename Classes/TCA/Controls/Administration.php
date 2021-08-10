@@ -2,13 +2,31 @@
 
 namespace ThomasLudwig\Tcaobject\TCA\Controls;
 
+/**
+ *
+ */
 class Administration
 {
+    /**
+     * @var bool|null
+     */
     protected ?bool $hideAtCopy = null;
+    /**
+     * @var bool|null
+     */
     protected ?bool $hideTable = null;
+    /**
+     * @var bool|null
+     */
     protected ?bool $readOnly = null;
+    /**
+     * @var bool|null
+     */
     protected ?bool $adminOnly = null;
 
+    /**
+     * @var string|null
+     */
     protected ?string $editlock = null;
 
     /**
@@ -76,6 +94,9 @@ class Administration
         $this->hideTable = $hideTable;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         $rawArray = [];

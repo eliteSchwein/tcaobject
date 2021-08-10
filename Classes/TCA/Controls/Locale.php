@@ -2,10 +2,22 @@
 
 namespace ThomasLudwig\Tcaobject\TCA\Controls;
 
+/**
+ *
+ */
 class Locale
 {
+    /**
+     * @var string|null
+     */
     protected ?string $languageField = 'sys_language_uid';
+    /**
+     * @var string|null
+     */
     protected ?string $transOrigPointerField = 'l10n_parent';
+    /**
+     * @var string|null
+     */
     protected ?string $transOrigDiffSourceField = 'l10n_diffsource';
 
     /**
@@ -56,6 +68,9 @@ class Locale
         $this->transOrigDiffSourceField = $transOrigDiffSourceField;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         $rawArray = [];

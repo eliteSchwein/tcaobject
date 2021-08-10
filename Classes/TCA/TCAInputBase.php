@@ -4,47 +4,144 @@ namespace ThomasLudwig\Tcaobject\TCA;
 
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAAppearanceBase;
 
+/**
+ *
+ */
 class TCAInputBase
 {
+    /**
+     * @var string|null
+     */
     protected ?string $name = null;
+    /**
+     * @var string|null
+     */
     protected ?string $label = null;
+    /**
+     * @var string|null
+     */
     protected ?string $type = null;
+    /**
+     * @var string|null
+     */
     protected ?string $databaseType = null;
+    /**
+     * @var string|null
+     */
     protected ?string $eval = null;
+    /**
+     * @var string|null
+     */
     protected ?string $renderType = null;
+    /**
+     * @var string|null
+     */
     protected ?string $foreign_table = null;
+    /**
+     * @var string|null
+     */
     protected ?string $foreign_table_where = null;
+    /**
+     * @var string|null
+     */
     protected ?string $displayCond = null;
+    /**
+     * @var string|null
+     */
     protected ?string $special = null;
+    /**
+     * @var string|null
+     */
     protected ?string $itemsProcFunc = null;
 
+    /**
+     * @var bool|null
+     */
     protected ?bool $visible = true;
+    /**
+     * @var bool|null
+     */
     protected ?bool $searchable = false;
+    /**
+     * @var bool|null
+     */
+    protected ?bool $requiresItems = null;
+    /**
+     * @var bool|null
+     */
     protected ?bool $exclude = true;
+    /**
+     * @var bool|null
+     */
     protected ?bool $readOnly = null;
 
+    /**
+     * @var int|null
+     */
     protected ?int $size = null;
+    /**
+     * @var int|null
+     */
     protected ?int $maxItems = null;
+    /**
+     * @var int|null
+     */
     protected ?int $minItems = null;
+    /**
+     * @var int|null
+     */
     protected ?int $multiple = null;
+    /**
+     * @var int|null
+     */
     protected ?int $autoSizeMax = null;
+    /**
+     * @var int|null
+     */
     protected ?int $autoSizeMin = null;
 
+    /**
+     * @var array
+     */
     protected array $fieldControl = [];
+    /**
+     * @var array
+     */
     protected array $items = [];
+    /**
+     * @var array
+     */
     protected array $behaviour = [];
+    /**
+     * @var array
+     */
     protected array $appearance = [];
+    /**
+     * @var array
+     */
     protected array $range = [];
+    /**
+     * @var array
+     */
     protected array $itemsProcConfig = [];
 
+    /**
+     * @var mixed|null
+     */
     protected $default = null;
 
-    function __construct($useItemsProcFunc = false) {
+    /**
+     * @param bool $useItemsProcFunc
+     */
+    function __construct(bool $useItemsProcFunc = false) {
         if($useItemsProcFunc) {
             $this->itemsProcFunc = get_class($this) . '->itemsProcFunc';
         }
     }
 
+    /**
+     * @param $configuration
+     */
     public function itemsProcFunc(&$configuration) {
 
     }
@@ -74,7 +171,7 @@ class TCAInputBase
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getDefault()
     {
@@ -82,7 +179,7 @@ class TCAInputBase
     }
 
     /**
-     * @param string $default
+     * @param mixed $default
      */
     public function setDefault($default): void
     {
@@ -153,6 +250,9 @@ class TCAInputBase
         $this->fieldControl = $fieldControls;
     }
 
+    /**
+     * @param TCAFieldControlBase $fieldControl
+     */
     public function addFieldControl(TCAFieldControlBase $fieldControl): void
     {
         $this->fieldControl[$fieldControl->getType()] = $fieldControl->asArray();
@@ -175,9 +275,9 @@ class TCAInputBase
     }
 
     /**
-     * @return bool
+     * @return null|bool
      */
-    public function isRequiresItems(): bool
+    public function isRequiresItems(): ?bool
     {
         return $this->requiresItems;
     }
@@ -222,6 +322,11 @@ class TCAInputBase
         return $this->items;
     }
 
+    /**
+     * @param $key
+     * @param null $id
+     * @param null $icon
+     */
     public function addItem($key, $id = null, $icon = null): void
     {
         $entry = [];
@@ -231,11 +336,17 @@ class TCAInputBase
         $this->items[] = $entry;
     }
 
+    /**
+     * @param $key
+     */
     public function removeItemByKey($key): void
     {
         unset($this->items[$key]);
     }
 
+    /**
+     * @param $value
+     */
     public function removeItemByValue($value): void
     {
         if (($key = array_search($value, $this->items)) !== false) {
@@ -259,16 +370,26 @@ class TCAInputBase
         $this->behaviour = $behaviour;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function addBehavior($key, $value): void
     {
         $this->behaviour[$key] = $value;
     }
 
+    /**
+     * @param $key
+     */
     public function removeBehaviorByKey($key): void
     {
         unset($this->behaviour[$key]);
     }
 
+    /**
+     * @param $value
+     */
     public function removeBehaviorByValue($value): void
     {
         if (($key = array_search($value, $this->behaviour)) !== false) {
@@ -324,16 +445,26 @@ class TCAInputBase
         $this->range = $range;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function addRange($key, $value): void
     {
         $this->range[$key] = $value;
     }
 
+    /**
+     * @param $key
+     */
     public function removeRangeByKey($key): void
     {
         unset($this->range[$key]);
     }
 
+    /**
+     * @param $value
+     */
     public function removeRangeByValue($value): void
     {
         if (($key = array_search($value, $this->range)) !== false) {
@@ -574,11 +705,17 @@ class TCAInputBase
         $this->appearance = $appearance;
     }
 
+    /**
+     * @param TCAAppearanceBase $appearance
+     */
     public function addAppearance(TCAAppearanceBase $appearance): void
     {
         $this->appearance[$appearance->getType()] = $appearance->getValue();
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         $rawArray = [];
@@ -610,7 +747,13 @@ class TCAInputBase
         return $rawArray;
     }
 
-    protected function parseInputFragment(array $array, $fragment) {
+    /**
+     * @param array $array
+     * @param $fragment
+     * @return array
+     */
+    protected function parseInputFragment(array $array, $fragment): array
+    {
         if($fragment === null) {
             return $array;
         }

@@ -2,14 +2,32 @@
 
 namespace ThomasLudwig\Tcaobject\TCA\Controls;
 
+/**
+ *
+ */
 class Misc
 {
+    /**
+     * @var string|null
+     */
     protected ?string $tstamp = 'tstamp';
+    /**
+     * @var string|null
+     */
     protected ?string $crdate = 'crdate';
+    /**
+     * @var string|null
+     */
     protected ?string $cruser_id = 'cruser_id';
 
+    /**
+     * @var bool|null
+     */
     protected ?bool $versioningWS = true;
 
+    /**
+     * @var int|null
+     */
     protected ?int $rootLevel = null;
 
     /**
@@ -92,6 +110,9 @@ class Misc
         $this->rootLevel = $rootLevel;
     }
 
+    /**
+     * @return array
+     */
     public function asArray(): array
     {
         $rawArray = [];
