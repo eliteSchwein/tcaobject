@@ -7,6 +7,10 @@ namespace ThomasLudwig\Tcaobject\Controller;
 
 use ThomasLudwig\Tcaobject\Misc\LabelFuncTest;
 use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
+use ThomasLudwig\Tcaobject\TCA\Inputs\Options\TCAAspectRatio;
+use ThomasLudwig\Tcaobject\TCA\Inputs\Options\TCACropArea;
+use ThomasLudwig\Tcaobject\TCA\Inputs\Options\TCACropVariant;
+use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputImageManipulaton;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputText;
 use ThomasLudwig\Tcaobject\TCA\TCAPaletteBase;
@@ -82,6 +86,27 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $textInput->setRichText(true);
 
         $tca->addInput($textInput);
+
+        $aspect = new TCAAspectRatio();
+        $aspect->setName('default');
+        $aspect->setTitle('default');
+        $aspect->setValue(1);
+
+        $area = new TCACropArea();
+
+        $crop = new TCACropVariant();
+        $crop->setName('default');
+        $crop->addAllowedAspectRatio('default', $aspect);
+        $crop->setTitle('default');
+        $crop->setCropArea($area);
+        $crop->setSelectedRatio('default');
+
+        $manipulator = new TCAInputImageManipulaton();
+        $manipulator->setName('manipulator');
+        $manipulator->addAllowedExtensions('jpg');
+        $manipulator->addCropVariant($crop);
+
+        $tca->addInput($manipulator);
 
         debug($tca->asArray());
     }

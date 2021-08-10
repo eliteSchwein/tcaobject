@@ -29,7 +29,7 @@ class TCAInputImageManipulaton extends TCAInputBase
     }
 
     public function addCropVariant(TCACropVariant $cropVariant) {
-        $this->cropVariants[$cropVariant->getName()] = $cropVariant.asArray();
+        $this->cropVariants[$cropVariant->getName()] = $cropVariant->asArray();
     }
 
     /**
@@ -55,6 +55,4 @@ class TCAInputImageManipulaton extends TCAInputBase
         }
         $this->allowedExtensions .= ','.$allowedExtensions;
     }
-
-
 }

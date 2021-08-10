@@ -82,7 +82,7 @@ class TCACropVariant
 
     public function addAllowedAspectRatio($key, $value)
     {
-        $this->allowedAspectRatios[$key] = $value;
+        $this->allowedAspectRatios[$key] = $value->asArray();
     }
 
     /**
@@ -103,6 +103,18 @@ class TCACropVariant
 
     public function asArray(): array
     {
-
+        $rawArray = [];
+        foreach ((array) $this as $key => $value) {
+            $cleanedUpKey = str_replace('*', '', $key);
+            if(!is_array($cleanedUpKey)) {
+                $cleanedUpKey = trim($cleanedUpKey);
+            }
+            if((is_array($value) && sizeof($value) > 0) ||
+                (!is_array($value) && !is_null($value))) {
+                $rawArray[$cleanedUpKey] = $value;
+            }
+        }
+        unset($rawArray['name']);
+        return $rawArray;
     }
 }
