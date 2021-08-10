@@ -2,6 +2,8 @@
 
 namespace ThomasLudwig\Tcaobject\TCA;
 
+use ThomasLudwig\Tcaobject\TCA\Inputs\TCAAppearanceBase;
+
 class TCAInputBase
 {
     protected ?string $name = null;
@@ -31,10 +33,24 @@ class TCAInputBase
     protected array $fieldControl = [];
     protected array $items = [];
     protected array $behaviour = [];
+    protected array $appearance = [];
     protected array $range = [];
     protected array $itemsProcConfig = [];
 
     protected $default = null;
+
+    function __construct() {
+        $itemsProcFuncTest = [];
+        $this->itemsProcFunc($itemsProcFuncTest);
+
+        if(!empty($labelProcFuncTest)) {
+            $this->itemsProcFunc = get_class($this) . '->itemsProcFunc';
+        }
+    }
+
+    public function itemsProcFunc(&$configuration) {
+
+    }
 
     /**
      * @return string
@@ -543,6 +559,27 @@ class TCAInputBase
     public function setAutoSizeMin(?int $autoSizeMin): void
     {
         $this->autoSizeMin = $autoSizeMin;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAppearance(): array
+    {
+        return $this->appearance;
+    }
+
+    /**
+     * @param array $appearance
+     */
+    public function setAppearance(array $appearance): void
+    {
+        $this->appearance = $appearance;
+    }
+
+    public function addAppearance(TCAAppearanceBase $appearance): void
+    {
+        $this->appearance[$appearance->getType()] = $appearance->getValue();
     }
 
     public function asArray(): array
