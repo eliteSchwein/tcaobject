@@ -424,18 +424,6 @@ class TCAInputBase
         $this->minItems = $minItems;
     }
 
-    protected function parseInputFragment(array $array, $fragment) {
-        if($fragment === null) {
-            return $array;
-        }
-        if(is_array($fragment)) {
-            $array[key($fragment)] = $fragment[key($fragment)];
-        } else {
-            $array[] = $fragment;
-        }
-        return $array;
-    }
-
 
     /**
      * @return string|null
@@ -586,5 +574,17 @@ class TCAInputBase
         unset($rawArray['config']['searchable']);
         unset($rawArray['config']['exclude']);
         return $rawArray;
+    }
+
+    protected function parseInputFragment(array $array, $fragment) {
+        if($fragment === null) {
+            return $array;
+        }
+        if(is_array($fragment)) {
+            $array[key($fragment)] = $fragment[key($fragment)];
+        } else {
+            $array[] = $fragment;
+        }
+        return $array;
     }
 }
