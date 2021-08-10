@@ -7,13 +7,18 @@ namespace ThomasLudwig\Tcaobject\Controller;
 
 use ThomasLudwig\Tcaobject\Misc\LabelFuncTest;
 use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
+use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlAddRecord;
+use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlEditPopup;
+use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlListModule;
 use ThomasLudwig\Tcaobject\TCA\Inputs\Options\TCAAspectRatio;
 use ThomasLudwig\Tcaobject\TCA\Inputs\Options\TCACropArea;
 use ThomasLudwig\Tcaobject\TCA\Inputs\Options\TCACropVariant;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputImageManipulaton;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
+use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputSelect;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputText;
 use ThomasLudwig\Tcaobject\TCA\TCAPaletteBase;
+use ThomasLudwig\Tcaobject\TCA\TCARenderTypes;
 use ThomasLudwig\Tcaobject\TCA\TCASpacer;
 
 /**
@@ -58,26 +63,13 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $tca->setTitle('LLL:EXT:tcaobject/Resources/Private/Language/locallang_db.xlf:tx_tcaobject_domain_model_example');
         $tca->setLabel('string_example');
         $tca->setIconFile('EXT:tcaobject/Resources/Public/Icons/tx_tcaobject_domain_model_example.gif');
-        $tca->setLabelUserFunc(LabelFuncTest::class . '->title');
 
-        $stringInput = new \ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput();
+        $stringInput = new TCAInputInput();
         $stringInput->setVisible(false);
         $stringInput->setName('string_example');
         $stringInput->setLabel('LLL:EXT:tcaobject/Resources/Private/Language/locallang_db.xlf:tx_tcaobject_domain_model_example.string_example');
 
         $tca->addInput($stringInput);
-
-        $testspacer = new TCASpacer();
-        $testspacer->setName('test');
-
-        $tca->addSpacer($testspacer);
-
-        $testpalette = new TCAPaletteBase();
-        $testpalette->setName('testpalette');
-        $testpalette->setLabel('test');
-        $testpalette->addItem('string_example');
-
-        $tca->addPalette($testpalette);
 
         $textInput = new TCAInputText();
         $textInput->setVisible(false);
@@ -87,26 +79,44 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         $tca->addInput($textInput);
 
-        $aspect = new TCAAspectRatio();
-        $aspect->setName('default');
-        $aspect->setTitle('default');
-        $aspect->setValue(1);
 
-        $area = new TCACropArea();
+        $inputPalette = new TCAPaletteBase();
+        $inputPalette->setName('inputpalette');
+        $inputPalette->setLabel('Inputs');
+        $inputPalette->addItem($stringInput->getName());
 
-        $crop = new TCACropVariant();
-        $crop->setName('default');
-        $crop->addAllowedAspectRatio('default', $aspect);
-        $crop->setTitle('default');
-        $crop->setCropArea($area);
-        $crop->setSelectedRatio('default');
+        $tca->addPalette($inputPalette);
 
-        $manipulator = new TCAInputImageManipulaton();
-        $manipulator->setName('manipulator');
-        $manipulator->addAllowedExtensions('jpg');
-        $manipulator->addCropVariant($crop);
+        $spacer = new TCASpacer();
+        $spacer->setName('spacer');
 
-        $tca->addInput($manipulator);
+        $tca->addSpacer($spacer);
+
+        $textPalette = new TCAPaletteBase();
+        $textPalette->setName('textpalette');
+        $textPalette->setLabel('Text Example');
+        $textPalette->addItem($textInput->getName());
+
+        $tca->addPalette($textPalette);
+
+        $listModuleFC = new TCAFieldControlListModule();
+        $listModuleFC->setDisabled(true);
+
+        $relatedSelect = new TCAInputSelect();
+        $relatedSelect->setName('example2input');
+        $relatedSelect->setLabel('Example 2 Input');
+        $relatedSelect->setMaxItems(9999);
+        $relatedSelect->setMultiple(0);
+        $relatedSelect->setRenderType(TCARenderTypes::selectMultipleSideBySide);
+        $relatedSelect->setAutoSizeMax(30);
+        $relatedSelect->setSize(10);
+        $relatedSelect->setForeignTable('tx_tcaobject_domain_model_example2');
+        $relatedSelect->setRelation('tx_tcaobject_example_example2_mm');
+        $relatedSelect->addFieldControl(new TCAFieldControlEditPopup());
+        $relatedSelect->addFieldControl(new TCAFieldControlAddRecord());
+        $relatedSelect->addFieldControl($listModuleFC);
+
+        $tca->addInput($relatedSelect);
 
         debug($tca->asArray());
     }

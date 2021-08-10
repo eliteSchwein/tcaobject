@@ -24,8 +24,11 @@ class TCAInputBase
     protected ?int $size = null;
     protected ?int $maxItems = null;
     protected ?int $minItems = null;
+    protected ?int $multiple = null;
+    protected ?int $autoSizeMax = null;
+    protected ?int $autoSizeMin = null;
 
-    protected array $fieldControls = [];
+    protected array $fieldControl = [];
     protected array $items = [];
     protected array $behaviour = [];
     protected array $range = [];
@@ -126,7 +129,7 @@ class TCAInputBase
      */
     public function getFieldControls(): array
     {
-        return $this->fieldControls;
+        return $this->fieldControl;
     }
 
     /**
@@ -134,12 +137,12 @@ class TCAInputBase
      */
     public function setFieldControls(array $fieldControls): void
     {
-        $this->fieldControls = $fieldControls;
+        $this->fieldControl = $fieldControls;
     }
 
-    public function addFieldControl($fieldControl): void
+    public function addFieldControl(TCAFieldControlBase $fieldControl): void
     {
-        $this->fieldControls[] = $fieldControl;
+        $this->fieldControl[$fieldControl->getType()] = $fieldControl->asArray();
     }
 
     /**
@@ -488,6 +491,70 @@ class TCAInputBase
     public function setReadOnly(?bool $readOnly): void
     {
         $this->readOnly = $readOnly;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getSearchable(): ?bool
+    {
+        return $this->searchable;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMultiple(): ?int
+    {
+        return $this->multiple;
+    }
+
+    /**
+     * @param int|null $multiple
+     */
+    public function setMultiple(?int $multiple): void
+    {
+        $this->multiple = $multiple;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getExclude(): ?bool
+    {
+        return $this->exclude;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAutoSizeMax(): ?int
+    {
+        return $this->autoSizeMax;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAutoSizeMin(): ?int
+    {
+        return $this->autoSizeMin;
+    }
+
+    /**
+     * @param int|null $autoSizeMax
+     */
+    public function setAutoSizeMax(?int $autoSizeMax): void
+    {
+        $this->autoSizeMax = $autoSizeMax;
+    }
+
+    /**
+     * @param int|null $autoSizeMin
+     */
+    public function setAutoSizeMin(?int $autoSizeMin): void
+    {
+        $this->autoSizeMin = $autoSizeMin;
     }
 
     public function asArray(): array

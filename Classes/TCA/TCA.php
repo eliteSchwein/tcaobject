@@ -24,7 +24,7 @@ class TCA
     protected Locale $locale;
     protected Interfaces $interfaces;
 
-    protected $label_userFunc = '';
+    protected $label_userFunc = null;
 
     protected array $rawArray = [
         'ctrl' => [
@@ -276,15 +276,15 @@ class TCA
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getLabelUserFunc(): string
+    public function getLabelUserFunc()
     {
         return $this->label_userFunc;
     }
 
     /**
-     * @param string $label_userFunc
+     * @param mixed $label_userFunc
      */
     public function setLabelUserFunc($label_userFunc): void
     {

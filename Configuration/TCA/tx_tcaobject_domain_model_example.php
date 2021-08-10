@@ -1,9 +1,14 @@
 <?php
 
 use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
+use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlAddRecord;
+use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlEditPopup;
+use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlListModule;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
+use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputSelect;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputText;
 use ThomasLudwig\Tcaobject\TCA\TCAPaletteBase;
+use ThomasLudwig\Tcaobject\TCA\TCARenderTypes;
 use ThomasLudwig\Tcaobject\TCA\TCASpacer;
 
 $tca = new DefaultTCA('tx_tcaobject_domain_model_example');
@@ -45,5 +50,24 @@ $textPalette->setLabel('Text Example');
 $textPalette->addItem($textInput->getName());
 
 $tca->addPalette($textPalette);
+
+$listModuleFC = new TCAFieldControlListModule();
+$listModuleFC->setDisabled(true);
+
+$relatedSelect = new TCAInputSelect();
+$relatedSelect->setName('example2input');
+$relatedSelect->setLabel('Example 2 Input');
+$relatedSelect->setMaxItems(9999);
+$relatedSelect->setMultiple(0);
+$relatedSelect->setRenderType(TCARenderTypes::selectMultipleSideBySide);
+$relatedSelect->setAutoSizeMax(30);
+$relatedSelect->setSize(10);
+$relatedSelect->setForeignTable('tx_tcaobject_domain_model_example2');
+$relatedSelect->setRelation('tx_tcaobject_example_example2_mm');
+$relatedSelect->addFieldControl(new TCAFieldControlEditPopup());
+$relatedSelect->addFieldControl(new TCAFieldControlAddRecord());
+$relatedSelect->addFieldControl($listModuleFC);
+
+$tca->addInput($relatedSelect);
 
 return $tca->asArray();
