@@ -6,7 +6,6 @@ use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputCheck;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputCustom;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputDateTimeInteger;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputSelect;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
  *
