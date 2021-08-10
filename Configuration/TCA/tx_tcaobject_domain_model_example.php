@@ -1,9 +1,9 @@
 <?php
 
 use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
-use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlAddRecord;
-use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlEditPopup;
-use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlListModule;
+use ThomasLudwig\Tcaobject\TCA\Inputs\FieldControls\TCAFieldControlAddRecord;
+use ThomasLudwig\Tcaobject\TCA\Inputs\FieldControls\TCAFieldControlEditPopup;
+use ThomasLudwig\Tcaobject\TCA\Inputs\FieldControls\TCAFieldControlListModule;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputSelect;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputText;

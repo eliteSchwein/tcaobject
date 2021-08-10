@@ -5,15 +5,11 @@ declare(strict_types=1);
 namespace ThomasLudwig\Tcaobject\Controller;
 
 
-use ThomasLudwig\Tcaobject\Misc\LabelFuncTest;
+use ThomasLudwig\Tcaobject\Domain\Model\Example;
 use ThomasLudwig\Tcaobject\TCA\DefaultTCA;
-use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlAddRecord;
-use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlEditPopup;
-use ThomasLudwig\Tcaobject\TCA\FieldControls\TCAFieldControlListModule;
-use ThomasLudwig\Tcaobject\TCA\Inputs\Options\TCAAspectRatio;
-use ThomasLudwig\Tcaobject\TCA\Inputs\Options\TCACropArea;
-use ThomasLudwig\Tcaobject\TCA\Inputs\Options\TCACropVariant;
-use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputImageManipulaton;
+use ThomasLudwig\Tcaobject\TCA\Inputs\FieldControls\TCAFieldControlAddRecord;
+use ThomasLudwig\Tcaobject\TCA\Inputs\FieldControls\TCAFieldControlEditPopup;
+use ThomasLudwig\Tcaobject\TCA\Inputs\FieldControls\TCAFieldControlListModule;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputInput;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputSelect;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputText;
@@ -124,10 +120,10 @@ class ExampleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     /**
      * action show
      *
-     * @param \ThomasLudwig\Tcaobject\Domain\Model\Example $example
+     * @param Example $example
      * @return string|object|null|void
      */
-    public function showAction(\ThomasLudwig\Tcaobject\Domain\Model\Example $example)
+    public function showAction(Example $example)
     {
         $this->view->assign('example', $example);
     }
