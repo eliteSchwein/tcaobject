@@ -6,13 +6,18 @@ use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputCheck;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputCustom;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputDateTimeInteger;
 use ThomasLudwig\Tcaobject\TCA\Inputs\TCAInputSelect;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 class DefaultTCA extends TCA
 {
     protected array $inputs = [];
-    public function __construct($table)
+    public function __construct($table = null)
     {
         parent::__construct();
+
+        if($table === null) {
+            return;
+        }
 
         $this->setDatabaseTable($table);
 

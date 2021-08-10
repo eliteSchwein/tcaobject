@@ -6,6 +6,7 @@ use ThomasLudwig\Tcaobject\TCA\Controls\Administration;
 use ThomasLudwig\Tcaobject\TCA\Controls\Interfaces;
 use ThomasLudwig\Tcaobject\TCA\Controls\Locale;
 use ThomasLudwig\Tcaobject\TCA\Controls\Misc;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 class TCA
 {
@@ -44,6 +45,21 @@ class TCA
         $this->administration = new Administration();
         $this->locale = new Locale();
         $this->interfaces = new Interfaces();
+
+        $labelUserFuncTest = [];
+        $this->labelUserFunc($labelUserFuncTest);
+
+        if(!empty($labelUserFuncTest)) {
+            $this->label_userFunc = get_class($this) . '->labelUserFunc';
+        }
+    }
+
+    /**
+     * @param $parameters
+     */
+    public function labelUserFunc(&$parameters)
+    {
+
     }
 
     /**
